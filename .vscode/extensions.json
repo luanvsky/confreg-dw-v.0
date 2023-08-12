@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "ms-toolsai.jupyter",
+        "davidanson.vscode-markdownlint",
+        "ms-python.python"
+    ]
+}
