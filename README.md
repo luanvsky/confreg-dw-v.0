@@ -2,7 +2,7 @@
 
 **Status: Concluído ✔️**
 
-👋 Olá, nobre vsitante do meuPortfólio GitHub!
+👋 Olá, nobre vsitante deste Projeto!
 
 É com satisfação que compartilho a conclusão do meu projeto de **Conformidade de Registro de Gestão e Tomada de Decisão** por meio de Data Warehouse e Scrum, direcionado ao setor público. 
 
