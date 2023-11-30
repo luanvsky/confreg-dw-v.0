@@ -2,13 +2,13 @@
 
 **Status: Concluído ✔️**
 
-👋 Olá, visitantes do meu Portfólio GitHub!
+👋 Olá, nobre vsitante do meuPortfólio GitHub!
 
 É com satisfação que compartilho a conclusão do meu projeto de **Conformidade de Registro de Gestão e Tomada de Decisão** por meio de Data Warehouse e Scrum, direcionado ao setor público. 
 
 ## Sobre o Projeto 🚀
 
-Este projeto teve como objetivo principal a criação de um Data Warehouse sólido, com foco na melhoria da conformidade de registro, na gestão eficiente e na capacidade de tomada de decisão dentro do contexto do setor público. Surpreendentemente, atuei como um "time de um homem só", adotando uma abordagem ágil baseada no Scrum para gerenciar todo o processo.
+Este projeto teve como objetivo principal a criação de um Data Warehouse sólido, com foco na melhoria da conformidade de registro, na gestão eficiente e na capacidade de tomada de decisão dentro do contexto do setor público. Atuei adotando uma abordagem ágil baseada no Scrum para gerenciar todo o processo.
 
 ## Objetivo: Diminuição do Tempo de Análise ⏳
 
