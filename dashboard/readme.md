@@ -8,6 +8,10 @@ Este repositório contém informações sobre o projeto de conformidade e gestã
 - **Análise de Dados do Setor**: Farei análises relevantes sobre o setor de conformidade e gestão documental, destacando tendências e oportunidades.
 - **Distribuição de Tarefas**: Descreverei como as tarefas estão sendo distribuídas e gerenciadas dentro da equipe.
 
+### Issues
+
+- https://github.com/luanvsky/confreg-dw-v.0/issues/90#issue-2493375052
+
 ## Como Contribuir
 Se você é um recrutador ou desenvolvedor interessado em conhecer mais sobre meu trabalho, fique à vontade para explorar este repositório. Sinta-se à vontade para entrar em contato comigo para mais detalhes.
 
