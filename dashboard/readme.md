@@ -12,8 +12,8 @@ Este repositório contém informações sobre o projeto de conformidade e gestã
 Se você é um recrutador ou desenvolvedor interessado em conhecer mais sobre meu trabalho, fique à vontade para explorar este repositório. Sinta-se à vontade para entrar em contato comigo para mais detalhes.
 
 ## Contato
-- Nome: [Victor de Melo]
-- E-mail: [victotqp@hotmail.com]
-- LinkedIn: [vcsmelo]
+- Nome: `Victor de Melo`
+- E-mail: `victotqp@hotmail.com`
+- LinkedIn: `vcsmelo`
 
 Espero que este README seja útil e que me ajude a destacar minhas habilidades e conquistas. Obrigado! 🚀👩‍💻
