@@ -11,6 +11,37 @@ Este repositório contém informações sobre o projeto de conformidade e gestã
 ### Issues
 
 - https://github.com/luanvsky/confreg-dw-v.0/issues/90#issue-2493375052
+- ...
+
+
+#### 1. Registrar o Andamento
+Nesta seção, vou documentar o progresso do projeto, destacando marcos alcançados, desafios superados e lições aprendidas. Por exemplo:
+
+Milestone 1: Configuração do Ambiente de Desenvolvimento
+Instalação das ferramentas necessárias (Power BI, Power Query, etc.).
+Conexão com a fonte de dados do SIAFI.
+Milestone 2: Análise Inicial dos Dados
+Exploração dos dados brutos.
+Identificação de padrões e inconsistências.
+
+#### 2. Análise de Dados do Setor
+Nesta seção, vou compartilhar insights relevantes sobre o setor de conformidade e gestão documental. Por exemplo:
+
+Tendências Emergentes:
+Aumento na digitalização de documentos fiscais.
+Desafios na padronização de metadados.
+Oportunidades de Melhoria:
+Implementação de fluxos de trabalho automatizados.
+Integração com outras soluções de gestão.
+
+#### 3. Distribuição de Tarefas
+Aqui, descreverei como as tarefas estão sendo distribuídas dentro da equipe. Por exemplo:
+
+Equipe de Desenvolvimento:
+João: Responsável pela extração dos dados do SIAFI.
+Maria: Encarregada da limpeza e transformação dos dados.
+Pedro: Focado na criação de visualizações no Power BI.
+
 
 ## Como Contribuir
 Se você é um recrutador ou desenvolvedor interessado em conhecer mais sobre meu trabalho, fique à vontade para explorar este repositório. Sinta-se à vontade para entrar em contato comigo para mais detalhes.
