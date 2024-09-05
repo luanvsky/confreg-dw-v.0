@@ -24,7 +24,7 @@ A metodologia ágil, exemplificada pelo Scrum, desempenhou um papel fundamental 
 
 - **Vantagens da Metodologia Ágil**: As vantagens são como os superpoderes da metodologia ágil. Ela nos ajuda a ser mais transparentes, colaborativos e rápidos. Isso significa que podemos trabalhar melhor em equipe, entregar resultados mais rapidamente e nos ajustar a qualquer mudança que ocorra no caminho.
 
-## Próximos Passos 🚀
+## [Próximos Passos](https://github.com/luanvsky/confreg-dw-v.0/blob/44d1333ef4ccab1e893750222d37a6224b0b30ff/dashboard/updating.md) 🚀
 
 Meus próximos passos envolvem a utilização avançada de técnicas de Data Science para aprofundar ainda mais nossos insights e melhorar a tomada de decisões no setor público. Aqui está um resumo do que está por vir:
 
