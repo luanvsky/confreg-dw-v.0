@@ -11,7 +11,7 @@ Este repositório contém informações sobre o projeto de conformidade e gestã
 ### Issues
 
 - https://github.com/luanvsky/confreg-dw-v.0/issues/90#issue-2493375052
-- **[Dashboard-dez24-versão-7.2]https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9**
+- **[Dashboard-dez24-versão-7.2](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)**
 
 
 #### 1. Registrar o Andamento
