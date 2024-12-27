@@ -1,60 +1,70 @@
-# Projeto de Conformidade e Gestão Documental do SIAFI
+# Projeto de Conformidade e Gestão Documental do SIAFI ️
 
-## Descrição
-Este repositório contém informações sobre o projeto de conformidade e gestão documental do Sistema Integrado de Administração Financeira (SIAFI). O objetivo é demonstrar meu trabalho, habilidades e potencial como profissional.
+**Status:** Concluído ✔️
 
-## Objetivos
-- **Registrar o Andamento**: Aqui, você encontrará atualizações sobre o progresso do projeto, incluindo marcos alcançados e desafios superados.
-- **Análise de Dados do Setor**: Farei análises relevantes sobre o setor de conformidade e gestão documental, destacando tendências e oportunidades.
-- **Distribuição de Tarefas**: Descreverei como as tarefas estão sendo distribuídas e gerenciadas dentro da equipe.
+Olá!  Este repositório demonstra o desenvolvimento de um dashboard interativo em Power BI  para análise da conformidade e gestão documental do Sistema Integrado de Administração Financeira (SIAFI), com foco na melhoria da tomada de decisões no setor público. Este projeto utilizou conceitos de Data Warehouse  e foi gerenciado com metodologia Scrum .
 
+## Sobre o Projeto 
 
-### Issues & Acesso aos dashboars🔗 
+O objetivo principal é otimizar a conformidade de registro, a gestão eficiente e a tomada de decisões no contexto do SIAFI, buscando a **diminuição do tempo de análise ⏳** dos processos.
 
-- **[Issue-90#](https://github.com/luanvsky/confreg-dw-v.0/issues/90#issue-2493375052)**
+## Gestão Ágil com Scrum 
 
-- **[Dashboard - versão 7.1](https://app.powerbi.com/view?r=eyJrIjoiMDg1MTYzYWUtMzM5Zi00Zjg3LWE5Y2ItZjVlMzQ4MThjNTdkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)**
+A metodologia ágil Scrum foi fundamental, permitindo:
 
-- **[Dashboard - versão 7.2](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)**
+*   Adaptação às mudanças e requisitos do projeto ⚙️.
+*   Maior transparência, colaboração  e entregas iterativas.
 
+## Versões Disponíveis 
 
-#### 1. Registrar o Andamento
-Nesta seção, vou documentar o progresso do projeto, destacando marcos alcançados, desafios superados e lições aprendidas. Por exemplo:
+O dashboard está disponível em:
 
-Milestone 1: Configuração do Ambiente de Desenvolvimento
-Instalação das ferramentas necessárias (Power BI, Power Query, etc.).
-Conexão com a fonte de dados do SIAFI.
-Milestone 2: Análise Inicial dos Dados
-Exploração dos dados brutos.
-Identificação de padrões e inconsistências.
+*   **Power BI Desktop (.pbix):** Arquivo original para edição .
+*   **Power BI Service (Online):** Versões online para visualização interativa:
+    *   **Dashboard - versão 7.1:** [https://app.powerbi.com/view?r=eyJrIjoiMDg1MTYzYWUtMzM5Zi00Zjg3LWE5Y2ItZjVlMzQ4MThjNTdkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9] 
+    *   **Dashboard - versão 7.2:** [https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)] 
 
+## Fonte de Dados ️
 
-#### 2. Análise de Dados do Setor
-Nesta seção, vou compartilhar insights relevantes sobre o setor de conformidade e gestão documental. Por exemplo:
+Atualmente, o dashboard é alimentado por uma planilha Google Sheets , atualizada diariamente pelos servidores do setor. Sou responsável pela manutenção, suporte e implementação de sugestões.
 
-Tendências Emergentes:
-Aumento na digitalização de documentos fiscais.
-Desafios na padronização de metadados.
-Oportunidades de Melhoria:
-Implementação de fluxos de trabalho automatizados.
-Integração com outras soluções de gestão.
+## Melhorias Futuras ️
 
+Estou estudando banco de dados SQL  para integrar o dashboard diretamente a um banco de dados, trazendo:
 
-#### 3. Distribuição de Tarefas
-Aqui, descreverei como as tarefas estão sendo distribuídas dentro da equipe. Por exemplo:
+*   **Maior performance e escalabilidade:** Consultas mais rápidas  e suporte a grandes volumes de dados.
+*   **Maior confiabilidade e integridade:** Redução de erros manuais  e consistência das informações. ✅
+*   **Atualizações automatizadas:** Eliminação da atualização manual da planilha. 
 
-Equipe de Desenvolvimento:
-João: Responsável pela extração dos dados do SIAFI.
-Maria: Encarregada da limpeza e transformação dos dados.
-Pedro: Focado na criação de visualizações no Power BI.
+Outras melhorias futuras incluem:
 
+*   **Análise de Dados Avançada:** Técnicas avançadas para *insights* mais profundos. 
+*   **Machine Learning:** Algoritmos para previsões e classificações precisas. 
+*   **Visualização de Dados Interativa:** Visualizações mais interativas e intuitivas. 
+*   **Relatórios Detalhados:** Relatórios com *insights* e recomendações. 
+*   **Automatização de Processos:** Automações para acelerar a análise. ⚙️
 
-## Como Contribuir
-Se você é um recrutador ou desenvolvedor interessado em conhecer mais sobre meu trabalho, fique à vontade para explorar este repositório. Sinta-se à vontade para entrar em contato comigo para mais detalhes.
+## Andamento do Projeto (Exemplos) 
 
-## Contato
-- Nome: `Victor de Melo`
-- E-mail: `victotqp@hotmail.com`
-- LinkedIn: `vcsmelo`
+*   **Milestone 1: Configuração do Ambiente:** Instalação das ferramentas (Power BI, Power Query, etc.) e conexão com a fonte de dados do SIAFI. 
+*   **Milestone 2: Análise Inicial dos Dados:** Exploração dos dados brutos e identificação de padrões e inconsistências. ️‍♂️
 
-Espero que este README seja útil e que me ajude a destacar minhas habilidades e conquistas. Obrigado! 🚀👩‍💻
+## Análise de Dados do Setor 
+
+*   **Tendências:** Aumento da digitalização de documentos fiscais  e desafios na padronização de metadados.
+*   **Oportunidades:** Implementação de fluxos de trabalho automatizados e integração com outras soluções de gestão. 
+
+## Distribuição de Tarefas 
+
+*   **Equipe de Desenvolvimento:**
+    *   Ivsky: Extração de dados do SIAFI e edição de dados na planilha.
+    *   Victor: Criação de visualizações no Power BI, limpeza e transformação dos dados.
+    *   Juvsky: Extração de dados do SIAFI e edição de dados na planilha
+    *   Pavsjy: Extração de dados do SIAFI e edição de dados na planilha
+    *   Tavky: Extração de dados do SIAFI e edição de dados na planilha
+
+## Contato 
+
+Nome: Victor de Melo
+E-mail: `victotqp@hotmail.com`
+LinkedIn: `@vcsmelo`
