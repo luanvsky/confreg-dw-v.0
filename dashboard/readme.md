@@ -8,10 +8,14 @@ Este repositório contém informações sobre o projeto de conformidade e gestã
 - **Análise de Dados do Setor**: Farei análises relevantes sobre o setor de conformidade e gestão documental, destacando tendências e oportunidades.
 - **Distribuição de Tarefas**: Descreverei como as tarefas estão sendo distribuídas e gerenciadas dentro da equipe.
 
-### Issues
 
-- https://github.com/luanvsky/confreg-dw-v.0/issues/90#issue-2493375052
-- **[Dashboard-dez24-versão-7.2](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)**
+### Issues & Acesso aos dashboars🔗 
+
+- **[Issue-90#](https://github.com/luanvsky/confreg-dw-v.0/issues/90#issue-2493375052)**
+
+- **[Dashboard - versão 7.1](https://app.powerbi.com/view?r=eyJrIjoiMDg1MTYzYWUtMzM5Zi00Zjg3LWE5Y2ItZjVlMzQ4MThjNTdkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)**
+
+- **[Dashboard - versão 7.2](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)**
 
 
 #### 1. Registrar o Andamento
@@ -24,6 +28,7 @@ Milestone 2: Análise Inicial dos Dados
 Exploração dos dados brutos.
 Identificação de padrões e inconsistências.
 
+
 #### 2. Análise de Dados do Setor
 Nesta seção, vou compartilhar insights relevantes sobre o setor de conformidade e gestão documental. Por exemplo:
 
@@ -33,6 +38,7 @@ Desafios na padronização de metadados.
 Oportunidades de Melhoria:
 Implementação de fluxos de trabalho automatizados.
 Integração com outras soluções de gestão.
+
 
 #### 3. Distribuição de Tarefas
 Aqui, descreverei como as tarefas estão sendo distribuídas dentro da equipe. Por exemplo:
