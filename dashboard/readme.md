@@ -21,8 +21,8 @@ O dashboard está disponível em:
 
 *   **Power BI Desktop (.pbix):** Arquivo original para edição .
 *   **Power BI Service (Online):** Versões online para visualização interativa:
-    *   **Dashboard - versão 7.1:** [https://app.powerbi.com/view?r=eyJrIjoiMDg1MTYzYWUtMzM5Zi00Zjg3LWE5Y2ItZjVlMzQ4MThjNTdkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9] 
-    *   **Dashboard - versão 7.2:** [https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)] 
+    *   [**Dashboard - versão 7.1**](https://app.powerbi.com/view?r=eyJrIjoiMDg1MTYzYWUtMzM5Zi00Zjg3LWE5Y2ItZjVlMzQ4MThjNTdkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) 
+    *   [**Dashboard - versão 7.2**](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) 
 
 ## Fonte de Dados ️
 
