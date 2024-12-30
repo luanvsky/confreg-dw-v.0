@@ -46,8 +46,8 @@ Outras melhorias futuras incluem:
 
 ## Andamento do Projeto (Exemplos) 
 
-*   **Milestone 1: Configuração do Ambiente:** Instalação das ferramentas (Power BI, Power Query, etc.) e conexão com a fonte de dados do SIAFI. 
-*   **Milestone 2: Análise Inicial dos Dados:** Exploração dos dados brutos e identificação de padrões e inconsistências. ️‍♂️
+*   **[Issues#81](https://github.com/luanvsky/confreg-dw-v.0/issues) Configuração do Ambiente:** Instalação das ferramentas (Power BI, Power Query, etc.) e conexão com a fonte de dados do SIAFI. 
+*   **[Roadmap](https://github.com/users/luanvsky/projects/4) Análise Inicial dos Dados:** Exploração dos dados brutos e identificação de padrões e inconsistências. ️‍♂️
 
 ## Análise de Dados do Setor 
 
