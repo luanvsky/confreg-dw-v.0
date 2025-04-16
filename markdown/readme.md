@@ -1,16 +1,3 @@
-
-# Geral
-![image](https://github.com/user-attachments/assets/40ce5c49-ddc9-4cbc-98eb-9dff481d6c64)
-https://docs.google.com/spreadsheets/d/1JPuQU6f11u_06ZLo7hIuEa6NcK5keUhgAIpRq7fYP4w/edit?gid=12633740#gid=12633740
-# Reitoria
-![image](https://github.com/user-attachments/assets/5db2af55-6116-41f9-b38a-463001343f79)
-# Tablet
-![Imagem do WhatsApp de 2025-04-16 à(s) 10 58 24_87cbbd8e](https://github.com/user-attachments/assets/df4346a1-0b40-4c7e-9ca6-a2f058c48641)
-
-
-Opa! 😊 aqui está todo o conteúdo que geramos até agora, tudo junto em um único arquivo Markdown. Assim, você poderá copiar e colar diretamente no seu GitHub sem problemas! 🚀
-
-
 # ⚙️ Projeto de Banco de Dados MySQL: Documentos, Servidores e Unidades Gestoras 🏢
 
 ## Visão Geral do Projeto
@@ -262,6 +249,15 @@ Este foi um projeto desenvolvido com o objetivo de demonstrar um fluxo completo 
 2.  **Modelagem Conceitual:** Criação de um Modelo Entidade-Relacionamento (ER) para representar a estrutura do banco de dados.
 3.  **Modelagem Lógica:** Tradução do modelo ER para um esquema relacional específico para MySQL, definindo tabelas, colunas, tipos de dados, chaves primárias e estrangeiras.
 4.  **Implementação Física:** Geração de scripts SQL para criar as tabelas no MySQL.
+
+# Geral
+![image](https://github.com/user-attachments/assets/40ce5c49-ddc9-4cbc-98eb-9dff481d6c64)
+https://docs.google.com/spreadsheets/d/1JPuQU6f11u_06ZLo7hIuEa6NcK5keUhgAIpRq7fYP4w/edit?gid=12633740#gid=12633740
+# Reitoria
+![image](https://github.com/user-attachments/assets/5db2af55-6116-41f9-b38a-463001343f79)
+# Tablet
+![Imagem do WhatsApp de 2025-04-16 à(s) 10 58 24_87cbbd8e](https://github.com/user-attachments/assets/df4346a1-0b40-4c7e-9ca6-a2f058c48641)
+
 5.  **População de Dados:** Inserção de dados de exemplo para facilitar testes e demonstrações.
 6.  **Elaboração de Consultas SQL:** Desenvolvimento de queries para extrair informações relevantes do banco de dados, abrangendo diferentes níveis de complexidade.
 
