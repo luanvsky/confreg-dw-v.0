@@ -2,7 +2,7 @@
 
 ## Visão Geral do Projeto
 
-Este projeto tem como objetivo criar um banco de dados MySQL para gerenciar documentos, servidores responsáveis, unidades gestoras e o histórico de processamento desses documentos. O modelo de dados foi desenvolvido a partir da análise das imagens fornecidas, buscando otimizar a organização, o controle e a rastreabilidade das informações.
+Este projeto tem como objetivo criar um banco de dados MySQL para gerenciar documentos, servidores responsáveis, unidades gestoras e o histórico de processamento desses documentos. O modelo de dados foi desenvolvido a partir da análise das imagens no final deste readme buscando otimizar a organização, o controle e a rastreabilidade das informações.
 
 ## Modelo de Entidade-Relacionamento (ER) 📊🔗✨
 
