@@ -38,7 +38,7 @@ Meus próximos passos envolvem a utilização avançada de técnicas de Data Sci
 
 - **Automatização de Processos**: Implementarei automações inteligentes para acelerar a análise de processos, contribuindo diretamente para a diminuição do tempo necessário.
 
-Fiquem ligados para mais atualizações! Estou ansioso para compartilhar as descobertas e contribuições adicionais deste projeto, que certamente podem beneficiar a eficiência, a conformidade e a capacidade de tomada de decisão no setor público.
+Estou ansioso para compartilhar as descobertas e contribuições adicionais deste projeto, que certamente podem beneficiar a eficiência, a conformidade e a capacidade de tomada de decisão no setor público.
 
 Obrigado pela visita ao meu Portfólio GitHub, e fiquem à vontade para entrar em contato para qualquer consulta ou esclarecimento adicional. 📩
 
