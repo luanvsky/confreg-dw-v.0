@@ -25,6 +25,8 @@ O dashboards estão disponíveis aqui 👇
     *   [**Dashboard - versão 7.2**](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)
     *   [**Dashboard - versão 8**](https://app.powerbi.com/view?r=eyJrIjoiNjM0MWIzOTYtZGEzMS00MTBmLTg4YjItNWM5YjBmZTQzZjY0IiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)
     *   [**Dashboard - versão 7.4**](https://app.powerbi.com/view?r=eyJrIjoiNmI1YjE3ZTktNzkzYS00NmU4LThlOTUtMDY2YzJjOTg4NDhjIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9)
+    *   [**Dashboard - versão 8.4**](https://app.powerbi.com/view?r=eyJrIjoiMjgyNTNiNzctMTQ0Zi00YmU0LThlZmMtMzhlODE1NDZlMWMwIiwidCI6ImNmZGMwZGI0LWM2OWQtNDEzNS1iMDAzLWRmOTA2Nzc0N2NmZiJ9) 
+
 
 ## Fonte de Dados ️
 
