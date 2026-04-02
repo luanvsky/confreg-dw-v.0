@@ -43,3 +43,9 @@ Estou ansioso para compartilhar as descobertas e contribuições adicionais dest
 Obrigado pela visita ao meu Portfólio GitHub, e fiquem à vontade para entrar em contato para qualquer consulta ou esclarecimento adicional. 📩
 
 Até breve! 👋
+
+> 🔗 para outros `readme`
+> 
+> https://github.com/luanvsky/confreg-dw-v.0/tree/15f290c0dcd35947ee747d3b8c9c5b19c74f37ad/dashboard
+>
+> https://github.com/luanvsky/confreg-dw-v.0/tree/15f290c0dcd35947ee747d3b8c9c5b19c74f37ad/markdown
