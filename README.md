@@ -47,5 +47,6 @@ Até breve! 👋
 > 🔗 para outros `readme`
 > 
 > https://github.com/luanvsky/confreg-dw-v.0/tree/15f290c0dcd35947ee747d3b8c9c5b19c74f37ad/dashboard
->
+> https://github.com/luanvsky/confreg-dw-v.0/tree/03ae3df83c19dfee8f7f57c956f5bc3a09217328/google-ai-studio
 > https://github.com/luanvsky/confreg-dw-v.0/tree/15f290c0dcd35947ee747d3b8c9c5b19c74f37ad/markdown
+> https://www.gettoby.com/p/xx7lsn1c996x
