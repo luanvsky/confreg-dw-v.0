@@ -60,7 +60,7 @@ Os contadores são **distintos** e resultam de varredura por expressão regular 
 
 O `.gitignore` mantém os caminhos bloqueados, impedindo que retornem por engano ao versionamento. Detalhes do controle em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#dados-pessoais-de-terceiros).
 
-> ✅ **Situação em 16/09/2026.** Os cinco arquivos foram removidos **da árvore atual e de todo o histórico alcançável** das ramificações publicadas, por reescrita de histórico com `git filter-repo` e `force push` sobre cópia integral do repositório. Permanecem recuperáveis apenas por canais que a plataforma mantém fora do alcance do `force push` — ver [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#inc-05--exposição-residual-não-alcançada-pelo-force-push).
+> ✅ **Situação em 17/09/2026.** Os cinco arquivos foram removidos **da árvore atual e de todo o histórico publicado** — primeiro por reescrita de histórico com `git filter-repo` e `force push` e, em seguida, pela [recriação do repositório](../docs/governanca-de-dados.md#recriação-do-repositório), que eliminou os canais que a plataforma mantinha fora do alcance do `force push`. O histórico publicado foi auditado antes e depois da publicação: nenhum nome de terceiro, nenhum CPF com dígito verificador válido, nenhuma URL de compartilhamento.
 
 
 ### `imagens/` — recursos de documentação
@@ -144,7 +144,8 @@ O caderno [`../notebooks/impconfreg.ipynb`](../notebooks/impconfreg.ipynb) cont�
 - [ ] **Documentar o dicionário de dados das extrações** — descrição de cada coluna, tipo e regra de preenchimento (previsto em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md)).
 - [x] **Substituir a coluna `servidor` por código identificador** nos recortes destinados a compartilhamento — concluído em 16/09/2026, com os códigos `SRV-01` a `SRV-05`.
 - [x] **Retirar do versionamento os arquivos com dados pessoais de terceiros** — concluído em 16/09/2026; cinco arquivos movidos para armazenamento controlado externo e caminhos bloqueados no `.gitignore`.
-- [x] **Reescrever o histórico do Git** — concluído em 16/09/2026 com `git filter-repo` e `force push` sobre as três ramificações, após cópia integral do repositório. Restam os objetos retidos pela plataforma e as referências de *pull request* `47` e `92`, que o `force push` não alcança — ver `INC-05` em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#inc-05--exposição-residual-não-alcançada-pelo-force-push).
+- [x] **Reescrever o histórico do Git** — concluído em 16/09/2026 com `git filter-repo` e `force push` sobre as três ramificações, após cópia integral do repositório.
+- [x] **Eliminar os resíduos que o `force push` não alcança** — concluído em 17/09/2026 pela recriação do repositório a partir do estado auditado, com exclusão do repositório anterior: os objetos retidos por SHA, as referências de *pull request* `47` e `92` e as discussões publicadas deixaram de existir — ver `INC-05` e `INC-06` em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md).
 - [ ] **Corrigir a extensão de `impconfreg_2023_v2_reitoria.tsv`** — o arquivo é separado por vírgula, não por tabulação.
 - [ ] **Avaliar a consolidação dos formatos duplicados** (`csv`/`tsv`) em um formato único com script de conversão versionado.
 
