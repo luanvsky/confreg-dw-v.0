@@ -1,8 +1,10 @@
-## Transformando a Gestão Empresarial com Data Science e Agilidade! 🚀
+# Portfólio — Divulgação do projeto no LinkedIn
+
+## Melhorando a Gestão Pública com Dados e Agilidade
 
 Prezados colegas do LinkedIn,
 
-É com grande satisfação que compartilho meu mais recente projeto concluído, que aborda a "Conformidade de Registro de Gestão e Tomada de Decisão". Este projeto representa uma conquista significativa em minha jornada profissional, com impactos concretos na eficiência e na qualidade da administração empresarial.
+É com satisfação que compartilho a conclusão do projeto **Conformidade de Registro de Gestão e Tomada de Decisão**, com impactos concretos na eficiência e na qualidade da gestão pública.
 
 **Objetivo Cumprido: Redução Significativa do Tempo de Análise ⏳**
 
@@ -25,12 +27,16 @@ Mas o trabalho não para por aqui! Estou empolgado em mergulhar ainda mais fundo
 
 Este projeto é uma demonstração clara de minhas habilidades em Data Science, gestão ágil e resolução de problemas complexos no mundo empresarial. Se sua empresa valoriza profissionais que podem fazer a diferença na conformidade, gestão e tomada de decisões, estou aberto a oportunidades empolgantes.
 
-Agradeço a todos que contribuíram para este sucesso, incluindo colegas da ENAP e Alura, bem como minha equipe de trabalho. Vossa ajuda foi inestimável.
+Agradeço a todos que contribuíram para este trabalho, incluindo os colegas da ENAP e da Alura, bem como a equipe de conformidade do IFS. A contribuição de todos foi inestimável.
 
-Não hesite em entrar em contato comigo por meio do LinkedIn ou pelo meu e-mail (seuemail@email.com). Estou ansioso para novos desafios e oportunidades de contribuir para o sucesso de sua organização.
-
-Vamos continuar fazendo a diferença juntos!
+Não hesite em entrar em contato comigo por meio do LinkedIn ou pelo meu e-mail (`victotqp@hotmail.com`). Estou ansioso para novos desafios e oportunidades de contribuir para a melhoria da gestão pública.
 
 Atenciosamente,
 
-[Seu Nome]
+**Victor de Melo**
+Mestrando em Ciência da Computação — Engenharia de Software e Sistemas de Informação
+[LinkedIn](https://www.linkedin.com/in/victor-melo-5b099942) · [GitHub](https://github.com/luanvsky)
+
+---
+
+> **Nota de contexto.** Este material de comunicação foi escrito para divulgação do projeto concluído. Ele descreve resultados observacionais relatados pela equipe, não medições experimentais controladas — a ressalva metodológica aplicável está em [../../README.md](../../README.md#resultados-relatados).

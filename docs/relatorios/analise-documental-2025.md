@@ -1,4 +1,17 @@
-# Relatório de Análise Documental - Visão Consolidada
+# Relatório de Análise Documental — Visão Consolidada
+
+> ⚠️ **DOCUMENTO COM DADOS PESSOAIS**
+>
+> Este relatório contém **métricas individuais de produtividade** vinculadas a servidores
+> identificados nominalmente. O tratamento se enquadra na Lei nº 13.709/2018 (LGPD) como
+> dado pessoal.
+>
+> **Antes de reutilizar ou compartilhar:** anonimize a coluna `Servidor` substituindo os
+> nomes por códigos identificadores e limite a divulgação a dados agregados. Não publique
+> recortes nominais fora do escopo das atividades de conformidade.
+>
+> Classificação: 🟠 **Restrito** — ver [governança de dados](../governanca-de-dados.md#privacidade-e-proteção-de-dados-pessoais).
+
 **Período:** 01/05/2025 a 15/08/2025  
 **Dias úteis considerados:** 20/mês (Agosto projetado)
 
