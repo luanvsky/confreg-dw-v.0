@@ -26,12 +26,10 @@ Este diretório reúne os arquivos editáveis versionados, o histórico de evolu
 dashboard/
 ├── pbix/                        # Versões vigentes e editáveis
 │   ├── cgconfreg_v5.pbix
-│   ├── cgconfreg_v6.pbix
 │   ├── cgconfreg_v7.pbix
 │   ├── cgconfreg_v7.1.pbix
 │   ├── cgconfreg_v7.2.pbix
 │   ├── cgconfreg_v7.3.pbix
-│   ├── cgconfreg_v8.pbix
 │   ├── cgconfreg_v8.1.pbix
 │   ├── cgconfreg_v8.3.pbix
 │   ├── cgconfreg_v8.4.pbix
@@ -71,13 +69,13 @@ A decisão de usar a publicação web em `.xlsx` como fonte direta do Power BI S
 | Versão | Arquivo | Publicação online |
 | --- | --- | --- |
 | 5 | [`pbix/cgconfreg_v5.pbix`](./pbix/cgconfreg_v5.pbix) | — |
-| 6 | [`pbix/cgconfreg_v6.pbix`](./pbix/cgconfreg_v6.pbix) | — |
+| 6 | — (retirado do repositório; ver [abaixo](#artefatos-retirados-do-repositório)) | — |
 | 7 | [`pbix/cgconfreg_v7.pbix`](./pbix/cgconfreg_v7.pbix) | — |
 | 7.1 | [`pbix/cgconfreg_v7.1.pbix`](./pbix/cgconfreg_v7.1.pbix) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiMDg1MTYzYWUtMzM5Zi00Zjg3LWE5Y2ItZjVlMzQ4MThjNTdkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
 | 7.2 | [`pbix/cgconfreg_v7.2.pbix`](./pbix/cgconfreg_v7.2.pbix) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
 | 7.3 | [`pbix/cgconfreg_v7.3.pbix`](./pbix/cgconfreg_v7.3.pbix) | — |
 | 7.4 | — (não versionada) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiNmI1YjE3ZTktNzkzYS00NmU4LThlOTUtMDY2YzJjOTg4NDhjIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
-| 8 | [`pbix/cgconfreg_v8.pbix`](./pbix/cgconfreg_v8.pbix) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiNjM0MWIzOTYtZGEzMS00MTBmLTg4YjItNWM5YjBmZTQzZjY0IiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
+| 8 | — (retirado do repositório; ver [abaixo](#artefatos-retirados-do-repositório)) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiNjM0MWIzOTYtZGEzMS00MTBmLTg4YjItNWM5YjBmZTQzZjY0IiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
 | 8.1 | [`pbix/cgconfreg_v8.1.pbix`](./pbix/cgconfreg_v8.1.pbix) | — |
 | 8.3 | [`pbix/cgconfreg_v8.3.pbix`](./pbix/cgconfreg_v8.3.pbix) | — |
 | 8.4 | [`pbix/cgconfreg_v8.4.pbix`](./pbix/cgconfreg_v8.4.pbix) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiMjgyNTNiNzctMTQ0Zi00YmU0LThlZmMtMzhlODE1NDZlMWMwIiwidCI6ImNmZGMwZGI0LWM2OWQtNDEzNS1iMDAzLWRmOTA2Nzc0N2NmZiJ9) |
@@ -87,7 +85,16 @@ A decisão de usar a publicação web em `.xlsx` como fonte direta do Power BI S
 
 | Arquivo | Origem | Observação |
 | --- | --- | --- |
-| [`pbix/legado/cgconfreg_v6_2023-11.pbix`](./pbix/legado/cgconfreg_v6_2023-11.pbix) | Primeiro artefato versionado da versão 6 (commit `cd18993`, 29/11/2023) | Substituído pelo artefato de dezembro de 2024 (commit `d82a28a`), mantido em `pbix/`. Preservado apenas para rastreabilidade histórica |
+| [`pbix/legado/cgconfreg_v6_2023-11.pbix`](./pbix/legado/cgconfreg_v6_2023-11.pbix) | Primeiro artefato versionado da versão 6, em novembro de 2023 | Substituído pelo artefato de dezembro de 2024, mantido em `pbix/`. Preservado apenas para rastreabilidade histórica |
+
+### Artefatos retirados do repositório
+
+| Arquivo | Motivo | Situação |
+| --- | --- | --- |
+| `cgconfreg_v6.pbix` | Identificação nominal de terceiros no dicionário de strings do modelo embutido | Retirado em 16/09/2026 — em armazenamento controlado |
+| `cgconfreg_v8.pbix` | Identificação nominal de terceiros como valor literal de filtro no layout do relatório | Retirado em 16/09/2026 — em armazenamento controlado |
+
+> Os dois artefatos foram retirados **da árvore e de todos os commits alcançáveis das ramificações publicadas**, por conterem identificação nominal de terceiros — conteúdo incompatível com a classificação 🔴 Restrito em repositório público, conforme a [política de dados](../docs/governanca-de-dados.md). As cópias integrais, com verificação de integridade, permanecem em armazenamento controlado e servirão de base para a **regeneração** dos painéis a partir das bases pseudonimizadas: a edição direta do `.pbix` não é segura. As publicações correspondentes no Power BI Service continuam ativas, independentes do repositório, até que essa regeneração seja concluída e publicada.
 
 ---
 
@@ -115,7 +122,7 @@ cgconfreg_v<MAJOR>[.<MINOR>].pbix
 **Regras:**
 
 1. Toda versão publicada recebe arquivo próprio em `pbix/` — arquivos são **imutáveis após a publicação**.
-2. A versão substituída é movida para `pbix/legado/` com sufixo de data (`_AAAA-MM`) em vez de ser apagada.
+2. A versão substituída é movida para `pbix/legado/` com sufixo de data (`_AAAA-MM`) em vez de ser apagada. Artefatos que carreguem identificação de terceiros são **retirados do repositório** e passam a armazenamento controlado — ver [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md).
 3. Arquivos temporários do Power BI (`~$*.pbix`, `*.pbix~`, `.pbiV5`) são ignorados por [../.gitignore](../.gitignore).
 4. A versão publicada em `pbix/` deve corresponder exatamente à do Power BI Service.
 

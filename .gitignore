@@ -99,3 +99,15 @@ dataset/planilhas/impconfreg_2023_v2_reitoria.xlsx
 dataset/planilhas/docs-victor-2025-*.xlsx
 dataset/planilhas/docs-victor-formatacao.tsv
 dataset/planilhas/docs-responsavel-2-formatacao.tsv
+
+# ---------------------------------------------------------------------------
+# Artefatos de Power BI com identificação nominal de terceiros
+#
+# O modelo embutido dos arquivos abaixo mantinha prenomes de integrantes em
+# conteúdo binário que não pode ser editado com segurança. Foram retirados do
+# repositório e do histórico em 16/09/2026 e passaram a armazenamento
+# controlado, onde aguardam regeneração a partir das bases pseudonimizadas.
+# Detalhes em dashboard/README.md e docs/governanca-de-dados.md.
+# ---------------------------------------------------------------------------
+dashboard/pbix/cgconfreg_v6.pbix
+dashboard/pbix/cgconfreg_v8.pbix

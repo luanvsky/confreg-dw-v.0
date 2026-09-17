@@ -150,19 +150,21 @@ Os arquivos editáveis ficam em [`dashboard/pbix/`](./dashboard/pbix/); as vers�
 | Versão | Arquivo | Publicação online |
 | --- | --- | --- |
 | 5 | `cgconfreg_v5.pbix` | — |
-| 6 | `cgconfreg_v6.pbix` | — |
+| 6 | — (retirada; ver [dashboard/README.md](./dashboard/README.md#artefatos-retirados-do-repositório)) | — |
 | 7 | `cgconfreg_v7.pbix` | — |
 | 7.1 | `cgconfreg_v7.1.pbix` | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiMDg1MTYzYWUtMzM5Zi00Zjg3LWE5Y2ItZjVlMzQ4MThjNTdkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
 | 7.2 | `cgconfreg_v7.2.pbix` | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiYTIwOTM4NDItNzU2NC00ODZmLWI4NzQtZDlmNzEwYTA3NDFkIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
 | 7.3 | `cgconfreg_v7.3.pbix` | — |
 | 7.4 | — (não versionada) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiNmI1YjE3ZTktNzkzYS00NmU4LThlOTUtMDY2YzJjOTg4NDhjIiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
-| 8 | `cgconfreg_v8.pbix` | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiNjM0MWIzOTYtZGEzMS00MTBmLTg4YjItNWM5YjBmZTQzZjY0IiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
+| 8 | — (retirada; ver [dashboard/README.md](./dashboard/README.md#artefatos-retirados-do-repositório)) | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiNjM0MWIzOTYtZGEzMS00MTBmLTg4YjItNWM5YjBmZTQzZjY0IiwidCI6IjJhMzZhZGVhLTQ5MTAtNDM3NS1hYjQzLWFiNDgxOTc0YjRlOCJ9) |
 | 8.1 | `cgconfreg_v8.1.pbix` | — |
 | 8.3 | `cgconfreg_v8.3.pbix` | — |
 | 8.4 | `cgconfreg_v8.4.pbix` | [Visualizar](https://app.powerbi.com/view?r=eyJrIjoiMjgyNTNiNzctMTQ0Zi00YmU0LThlZmMtMzhlODE1NDZlMWMwIiwidCI6ImNmZGMwZGI0LWM2OWQtNDEzNS1iMDAzLWRmOTA2Nzc0N2NmZiJ9) |
 | — | `impconfreg_csv_v4.pbix` | Importação da base analítica |
 
 Detalhes de cada versão, evolução do modelo e limitações estão em [dashboard/README.md](./dashboard/README.md). O relato técnico da versão 8 — modelo, medidas DAX, decisões de otimização e resultados observados — está em [dashboard/v8.md](./dashboard/v8.md).
+
+> Os arquivos das versões 6 e 8 foram **retirados do repositório** em 16/09/2026: carregavam identificação nominal de terceiros em conteúdo binário não editável com segurança. Permanecem em armazenamento controlado e serão regenerados a partir das bases pseudonimizadas. Ver [dashboard/README.md](./dashboard/README.md#artefatos-retirados-do-repositório) e a [política de governança de dados](./docs/governanca-de-dados.md).
 
 ---
 

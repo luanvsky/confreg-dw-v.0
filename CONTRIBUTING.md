@@ -109,9 +109,9 @@ A consistência de nomenclatura é um requisito de governança: nomes previsíve
 
 Para evitar ambiguidade entre arquivos com o mesmo nome:
 
-1. Cada release do painel recebe uma versão (`cgconfreg_v8.pbix`).
+1. Cada release do painel recebe uma versão (`cgconfreg_v8.4.pbix`).
 2. Versões publicadas no Power BI Service e documentadas em [`dashboard/README.md`](./dashboard/README.md) devem ter o mesmo identificador usado no arquivo `.pbix`.
-3. Arquivos obsoletos são movidos para `dashboard/pbix/legado/` em vez de excluídos, preservando a rastreabilidade histórica.
+3. Arquivos obsoletos são movidos para `dashboard/pbix/legado/` em vez de excluídos, preservando a rastreabilidade histórica. Exceção: artefatos que carreguem identificação de terceiros são **retirados do repositório** e passam a armazenamento controlado, conforme a política de dados abaixo.
 4. Ao publicar uma nova versão, registre o que mudou em [`dashboard/v8.md`](./dashboard/v8.md) ou no arquivo de release correspondente.
 
 ---
