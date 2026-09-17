@@ -40,6 +40,10 @@ Descreva o resultado correto esperado.
 > **Não anexe** recortes com nome de servidor, planilhas internas completas, links de
 > compartilhamento com token de acesso ou credenciais. Consulte a política de dados em
 > [CONTRIBUTING.md](../../CONTRIBUTING.md).
+>
+> **Não cole bases de dados.** Issues e comentários são públicos, indexáveis e não têm
+> reescrita de histórico: o conteúdo indesejado só sai por exclusão manual, depois de já
+> ter sido exposto. Cole o mínimo necessário para descrever o problema.
 
 ## Ambiente
 

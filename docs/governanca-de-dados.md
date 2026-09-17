@@ -293,6 +293,8 @@ Os contadores são **distintos** e provêm de varredura por expressão regular s
 | R10 | Identificação nominal residual nos `.pbix` e nos relatórios publicados — no dicionário de strings do modelo, como valor literal de filtro e como rótulo de campo | Alta | Médio | Regeneração dos painéis a partir das bases pseudonimizadas, com revisão dos filtros que hoje usam prenome como valor literal, e republicação ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
 | R11 | Reidentificação indireta por cruzamento das métricas individuais com bases públicas do Instituto | Média | Médio | Agregação das métricas ou substituição do código de projeto por código funcional institucional |
 | R12 | Dados pessoais de terceiros recuperáveis no histórico do repositório público, apesar da remoção da árvore atual | Média | Alto | [Reescrita do histórico](#reescrita-do-histórico) executada em 16/09/2026 com `git filter-repo`; resíduo restrito aos objetos retidos pela plataforma e às referências de *pull request* ([`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push)) |
+| R13 | Dados pessoais publicados no corpo de issues, no corpo de *pull requests* e em comentários — superfície fora do alcance da reescrita de histórico | Alta | Alto | Exclusão manual dos itens afetados ([`INC-06`](#inc-06--exposição-em-issues-comentários-e-site-publicado)); aviso de não colar dados pessoais nos modelos de issue; triagem obrigatória antes de publicar qualquer conteúdo de discussão |
+| R14 | Republicação automática da árvore do repositório em site público, sem controle de acesso e sujeito a indexação por buscadores | Alta | Médio | Publicação restrita à árvore corrente; retenção de um dia nos artefatos de implantação; desabilitar o site quando ele não for necessário ([`INC-06`](#inc-06--exposição-em-issues-comentários-e-site-publicado)) |
 
 ---
 
@@ -307,6 +309,7 @@ Registro das ocorrências de exposição de informação identificadas no reposi
 | [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) | Identificação nominal residual no modelo embutido dos `.pbix` | 🔲 Requer regeneração e republicação |
 | [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório) | Dados pessoais de terceiros em extrações versionadas e no histórico | ✅ Mitigado na árvore atual e no histórico alcançável |
 | [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push) | Exposição residual não alcançada pelo `force push` | 🔲 Requer ação junto ao GitHub |
+| [`INC-06`](#inc-06--exposição-em-issues-comentários-e-site-publicado) | Dados pessoais em issues e comentários; republicação em site público | 🔲 Requer ação junto ao GitHub |
 
 ### INC-01 — Link de compartilhamento interno com token de acesso
 
@@ -451,6 +454,29 @@ A alternativa de recriar o repositório a partir do estado atual permanece dispo
 
 ---
 
+### INC-06 — Exposição em issues, comentários e site publicado
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Identificador** | `INC-06` |
+| **Data de detecção** | 16/09/2026 |
+| **Detectado por** | Auditoria das superfícies de publicação do repositório, estendida às issues, aos corpos de *pull request*, aos comentários e ao site publicado automaticamente |
+| **Natureza** | Dados pessoais de terceiros e link interno com token de acesso publicados em conteúdo de discussão; republicação integral da árvore do repositório em site público |
+| **Canais** | Corpo de issues e de *pull requests*, comentários de issues e site `github.io` do projeto, habilitado em 13/09/2023 |
+| **Conteúdo alcançável** | Em três comentários de uma mesma issue, colagens de bases de trabalho do projeto — **dois deles com 70 CPFs válidos (69 distintos)**, além de grande volume de sequências numéricas com formato compatível com telefone e com CEP. Prenomes de integrantes em três corpos de issue e três comentários. Três endereços internos de compartilhamento, em dois corpos de issue e um comentário — **um deles com token de acesso** |
+| **Classificação do conteúdo** | 🔴 Pessoal — dado de terceiros |
+| **Amplitude** | 88 issues (incluindo *pull requests*), 122 comentários e 7 anexos de usuário de conteúdo não verificado |
+| **Causa raiz** | Issues e comentários são superfície de **publicação**, não de versionamento: a reescrita com `git filter-repo` e o `force push` não os alcançam, e a exclusão é manual e item a item. O mesmo vale para o site publicado, que espelha a árvore do repositório |
+| **Mitigação pelo repositório** | Nenhuma sobre o conteúdo já publicado. Controle preventivo: aviso de não anexar dados pessoais nos modelos de issue |
+| **Ação requerida** | Exclusão dos comentários afetados e edição dos corpos de issue pelo proprietário, no navegador; revogação do compartilhamento do link com token na origem; solicitação ao suporte do GitHub da remoção das visualizações em cache e da exclusão dos anexos de usuário, que o mantenedor não pode excluir |
+| **Status** | 🔲 Requer ação junto ao GitHub |
+
+**Sobre o site publicado.** A auditoria verificou que a publicação corrente serve a árvore limpa — os artefatos retirados em `INC-04` não são mais acessíveis por esse canal — e que os artefatos de implantação têm **retenção de um dia**, de modo que a versão publicada antes da remoção já expirou e não é recuperável pela API da plataforma. Permanece, ainda assim, uma superfície de amplificação: todo conteúdo versionado, inclusive os `.pbix` do `INC-03`, é republicado sem autenticação e sujeito a indexação. Se o site não for necessário, desabilitá-lo reduz a superfície sem perda de conteúdo.
+
+> **Regra derivada.** Antes de colar qualquer conteúdo em issue, comentário ou corpo de *pull request*, aplicar a mesma pergunta de triagem aplicada ao versionamento: *este conteúdo identifica alguém que não participou do projeto?* Não existe reescrita de histórico do lado da plataforma para conteúdo de discussão — a correção é sempre manual e posterior à exposição.
+
+---
+
 ## Indicadores de governança
 
 | Indicador | Fórmula | Meta |
@@ -468,6 +494,8 @@ A alternativa de recriar o repositório a partir do estado atual permanece dispo
 | Exposição residual por referências de *pull request* | Referências de *pull request* com conteúdo pessoal alcançável | 0 |
 | Links internos versionados | URLs com token de acesso presentes em artefatos versionados | 0 |
 | Incidentes de exposição abertos | Incidentes com status diferente de concluído | 0 |
+| Dados pessoais em conteúdo de discussão | Itens de discussão (issue, *pull request* ou comentário) com dado pessoal de terceiros | 0 |
+| Visibilidade externa do conteúdo versionado | Superfícies públicas que republicam a árvore do repositório | 1 (somente o repositório) |
 
 **Medição de 16/09/2026.** Valores apurados para os indicadores de exposição:
 
@@ -480,7 +508,9 @@ A alternativa de recriar o repositório a partir do estado atual permanece dispo
 | Arquivos com dados de terceiros versionados | 0 — quatro arquivos remanescentes auditados | ✅ |
 | Defasagem de pseudonimização | 0 nas bases redistribuídas | ✅ |
 | Exposição de dados pessoais | 12 artefatos 🟠 Restrito versionados, dos quais 2 com identificação de terceiros | 🔲 [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) |
-| Incidentes de exposição abertos | **3** (`INC-01`, `INC-03`, `INC-05`) | 🔲 |
+| Incidentes de exposição abertos | **4** (`INC-01`, `INC-03`, `INC-05`, `INC-06`) | 🔲 |
+| Dados pessoais em conteúdo de discussão | **70 CPFs válidos em 2 comentários**; prenomes de integrantes em **6** itens de discussão; **3** endereços internos, um deles com token | 🔲 [`INC-06`](#inc-06--exposição-em-issues-comentários-e-site-publicado) |
+| Visibilidade externa do conteúdo versionado | **2** — repositório e site publicado | 🔲 [`INC-06`](#inc-06--exposição-em-issues-comentários-e-site-publicado) |
 
 Os demais indicadores dependem de medição sobre a operação corrente e ainda não possuem série histórica.
 
@@ -500,14 +530,15 @@ Nível 5 — Otimizado      Validação automatizada; alertas proativos; melhori
 
 ### Ações prioritárias
 
-1. Revogar o compartilhamento do arquivo `CONFREG.xlsx` na origem (`INC-01`).
-2. Solicitar ao suporte do GitHub a remoção dos objetos retidos e a exclusão definitiva das referências de *pull request* `47` e `92` (`INC-05`) — única ação capaz de eliminar o resíduo que o `force push` não alcança.
-3. Regenerar os painéis a partir das bases pseudonimizadas e republicá-los (`INC-03`), revisando os filtros do relatório que hoje usam prenome como valor literal.
-4. Revisar a classificação e a exposição dos artefatos restritos.
-5. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
-6. Formalizar o catálogo de dados com responsáveis nomeados.
-7. Implantar segurança em nível de linha nos painéis publicados.
-8. Estabelecer a triagem de dados de terceiros como etapa obrigatória antes de qualquer versionamento.
+1. Excluir os comentários com dados pessoais e editar os corpos de issue afetados, e desabilitar o site publicado caso ele não seja necessário (`INC-06`).
+2. Revogar o compartilhamento do arquivo `CONFREG.xlsx` na origem (`INC-01`).
+3. Solicitar ao suporte do GitHub a remoção dos objetos retidos, a exclusão definitiva das referências de *pull request* `47` e `92`, a remoção das visualizações em cache e a exclusão dos anexos de usuário (`INC-05`, `INC-06`) — única ação capaz de eliminar o resíduo que o `force push` não alcança.
+4. Regenerar os painéis a partir das bases pseudonimizadas e republicá-los (`INC-03`), revisando os filtros do relatório que hoje usam prenome como valor literal.
+5. Revisar a classificação e a exposição dos artefatos restritos.
+6. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
+7. Formalizar o catálogo de dados com responsáveis nomeados.
+8. Implantar segurança em nível de linha nos painéis publicados.
+9. Estabelecer a triagem de dados de terceiros como etapa obrigatória antes de qualquer versionamento e antes de qualquer publicação em issue, comentário ou *pull request*.
 
 ---
 
