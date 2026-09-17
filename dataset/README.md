@@ -102,6 +102,8 @@ Como regra geral, inspecione o separador antes de carregar qualquer arquivo dest
 | 🔴 **Restrito — dados pessoais de terceiros** | Fora do repositório | Não versionado; armazenamento controlado com acesso nominal |
 
 > ✅ **Minimização aplicada.** A coluna `servidor` e o texto livre de observação dos recortes `impconfreg_2023_v2_reitoria.*` foram **pseudonimizados**: os nomes foram substituídos pelos códigos `SRV-01` a `SRV-05`, e as métricas agregadas foram preservadas integralmente. A tabela de correspondência entre código e pessoa **não é versionada** — procedimento em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#pseudonimização-e-minimização).
+>
+> ⚠️ **Divergência registrada.** A decisão inicial previa a **remoção** da coluna `servidor`. A execução optou por **mantê-la pseudonimizada**, porque a remoção descaracterizaria a distribuição de carga de trabalho por unidade gestora, que é objeto da análise. A coluna, portanto, permanece nos arquivos — com código no lugar do nome.
 
 > ✅ **Segregação aplicada.** Os arquivos com identificação de terceiros foram **retirados do versionamento** e mantidos fora da árvore de trabalho. Os quatro arquivos que permanecem no diretório foram verificados e **não contêm CPF nem endereço de e-mail**.
 

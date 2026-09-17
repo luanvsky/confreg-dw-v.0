@@ -366,6 +366,8 @@ A revogação na origem permanece necessária: a reescrita remove o link do repo
 
 **Nota sobre o método.** A substituição foi feita por **casamento de valor integral**, nunca por busca textual. Em um primeiro ensaio, uma substituição por expressão regular alterou registros de **pessoas alheias à equipe**: o prenome de um dos integrantes ocorre como nome intermediário de terceiros e em descrições de contratação nas planilhas. O ensaio foi integralmente descartado e refeito com correspondência exata. A verificação comparou as versões original e pseudonimizada parte a parte, confirmando que a diferença ficou restrita às células de identificação e que as contagens de registros e de valores permaneceram idênticas.
 
+**Divergência entre decisão e execução.** A decisão inicial previa **remover** a coluna `servidor` das bases redistribuídas. A execução **manteve** a coluna, com os nomes substituídos por código: a remoção descaracterizaria a distribuição de carga de trabalho por unidade gestora, que é objeto da análise. A divergência fica registrada porque altera o conjunto de dados efetivamente publicado — a coluna existe, ainda que pseudonimizada.
+
 > **Recomendação permanente.** A tabela de correspondência entre código e pessoa **não deve ser versionada**. Ela é mantida pelo responsável pelo tratamento dos dados, fora do controle de versão, e é o único artefato capaz de reverter a pseudonimização.
 
 ### INC-03 — Identificação nominal residual no modelo embutido dos `.pbix`
