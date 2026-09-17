@@ -317,7 +317,7 @@ Registro das ocorrências de exposição de informação identificadas no reposi
 | **Detectado por** | Revisão de classificação e auditoria de conteúdo versionado |
 | **Natureza** | Link de compartilhamento interno com token de acesso (`?e=`) publicado em arquivo versionado |
 | **Artefato** | `dataset/.xls/readme.md` (removido da árvore atual na reestruturação e do histórico na [reescrita](#reescrita-do-histórico)) |
-| **Origem do link** | `[link-interno-removido]` — arquivo `CONFREG.xlsx` |
+| **Origem do link** | OneDrive institucional (conta `@ifs.edu.br`) — arquivo `CONFREG.xlsx` |
 | **Classificação do conteúdo** | 🟠 Restrito — planilha de controle da conformidade com potencial dado pessoal |
 | **Amplitude** | Um único compartilhamento, referenciado em três formatos de URL |
 | **Exposição na árvore atual** | Não — verificada ausência de URLs internas em todos os `.md` |

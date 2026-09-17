@@ -26,12 +26,14 @@ O Modelo Entidade-Relacionamento (ER) abaixo representa a estrutura do banco de 
 
 2. **Servidor**
 - `id_servidor` (PK) – Identificação única do servidor
-- `nome_servidor` – Nome do servidor
+- `codigo_servidor` – Código identificador do servidor (pseudônimo, no padrão `SRV-0N`)
 - `cargo` – Cargo/Função do servidor
 - `setor` – Setor ao qual o servidor pertence
 - `data_admissao` – Data de admissão
 - `id_supervisor` (FK) - ID do supervisor do servidor (auto-relacionamento)
 - `nivel_acesso` - Nível de acesso do servidor ao sistema
+
+> **Nota de privacidade.** O nome do servidor **não** integra o modelo. A identificação da pessoa é feita por `codigo_servidor`, no mesmo padrão `SRV-0N` adotado nas bases redistribuídas — a correspondência entre código e pessoa é mantida fora do banco e fora do controle de versão, conforme [governanca-de-dados.md](./governanca-de-dados.md#pseudonimização-e-minimização). Os registros de exemplo deste documento usam apenas esses códigos.
 
 3. **Unidade Gestora (UG)**
 - `id_unidade_gestora` (PK) – Identificação única da UG
@@ -39,7 +41,7 @@ O Modelo Entidade-Relacionamento (ER) abaixo representa a estrutura do banco de 
 - `orgao_superior` – Órgão superior vinculado
 - `orcamento_disponivel` – Valor de orçamento disponível
 - `total_documentos_processados` - Total de documentos processados pela UG
-- `responsavel_ug` - Nome do responsável pela UG
+- `id_responsavel_ug` (FK) - Servidor responsável pela UG (referencia `codigo_servidor`)
 
 4. **Histórico de Processamento**
 - `id_historico` (PK) – Identificação única da análise
@@ -74,7 +76,7 @@ Os comandos SQL abaixo criam as tabelas no MySQL, definindo as chaves primárias
 -- Tabela: Servidor
 CREATE TABLE Servidor (
     id_servidor INT PRIMARY KEY AUTO_INCREMENT,
-    nome_servidor VARCHAR(100) NOT NULL,
+    codigo_servidor VARCHAR(20) NOT NULL UNIQUE,
     cargo VARCHAR(50),
     setor VARCHAR(50),
     data_admissao DATE,
@@ -90,7 +92,8 @@ CREATE TABLE Unidade_Gestora (
     orgao_superior VARCHAR(100),
     orcamento_disponivel DECIMAL(15,2),
     total_documentos_processados INT DEFAULT 0,
-    responsavel_ug VARCHAR(100)
+    id_responsavel_ug VARCHAR(20),
+    FOREIGN KEY (id_responsavel_ug) REFERENCES Servidor(codigo_servidor)
 );
 
 -- Tabela: Documento
@@ -140,15 +143,15 @@ Abaixo estão alguns comandos INSERT para popular as tabelas com dados de exempl
 
 ```sql
 -- Inserindo servidores
-INSERT INTO Servidor (nome_servidor, cargo, setor, data_admissao, id_supervisor, nivel_acesso) VALUES
-('Ana Ribeiro', 'Analista', 'Financeiro', '2020-06-15', NULL, 'Aprovação'),
-('Beatriz Costa', 'Gerente', 'Administrativo', '2018-10-22', NULL, 'Aprovação'),
-('Carlos Oliveira', 'Assistente', 'Financeiro', '2023-02-10', 1, 'Edição');
+INSERT INTO Servidor (codigo_servidor, cargo, setor, data_admissao, id_supervisor, nivel_acesso) VALUES
+('SRV-01', 'Analista', 'Financeiro', '2020-06-15', NULL, 'Aprovação'),
+('SRV-02', 'Gerente', 'Administrativo', '2018-10-22', NULL, 'Aprovação'),
+('SRV-03', 'Assistente', 'Financeiro', '2023-02-10', 1, 'Edição');
 
 -- Inserindo unidades gestoras
-INSERT INTO Unidade_Gestora (codigo_ug, orgao_superior, orcamento_disponivel, total_documentos_processados, responsavel_ug) VALUES
-('UG152420', 'Secretaria de Finanças', 500000.00, 20, 'João Ferreira'),
-('UG154679', 'Secretaria de Administração', 350000.00, 15, 'Maria Santos');
+INSERT INTO Unidade_Gestora (codigo_ug, orgao_superior, orcamento_disponivel, total_documentos_processados, id_responsavel_ug) VALUES
+('UG152420', 'Secretaria de Finanças', 500000.00, 20, 'SRV-01'),
+('UG154679', 'Secretaria de Administração', 350000.00, 15, 'SRV-02');
 
 -- Inserindo documentos
 INSERT INTO Documento (tipo_documento, descricao, data_criacao, id_servidor, id_unidade_gestora, status, prioridade, versao) VALUES
@@ -193,7 +196,7 @@ SELECT tipo_documento, COUNT(*) AS total_documentos FROM Documento GROUP BY tipo
 SELECT * FROM Documento WHERE data_criacao BETWEEN '2025-04-01' AND '2025-04-30';
 
 -- 6 Listar servidores que analisaram documentos
-SELECT DISTINCT s.nome_servidor
+SELECT DISTINCT s.codigo_servidor
 FROM Servidor s
 JOIN Historico_Processamento hp ON s.id_servidor = hp.id_servidor;
 ```
@@ -202,15 +205,15 @@ JOIN Historico_Processamento hp ON s.id_servidor = hp.id_servidor;
 
 ```sql
 -- 7 Listar documentos e seus servidores responsáveis
-SELECT d.id_documento, d.tipo_documento, s.nome_servidor
+SELECT d.id_documento, d.tipo_documento, s.codigo_servidor
 FROM Documento d
 JOIN Servidor s ON d.id_servidor = s.id_servidor;
 
 -- 8 Tempo médio de processamento por servidor
-SELECT s.nome_servidor, AVG(hp.tempo_processamento) AS media_tempo
+SELECT s.codigo_servidor, AVG(hp.tempo_processamento) AS media_tempo
 FROM Historico_Processamento hp
 JOIN Servidor s ON hp.id_servidor = s.id_servidor
-GROUP BY s.nome_servidor
+GROUP BY s.codigo_servidor
 ORDER BY media_tempo DESC;
 
 -- 9 Buscar documentos com anexos
@@ -219,14 +222,14 @@ FROM Documento d
 JOIN Anexo a ON d.id_documento = a.id_documento;
 
 -- 10 Ranking de servidores que analisaram mais documentos
-SELECT s.nome_servidor, COUNT(hp.id_historico) AS total_analises
+SELECT s.codigo_servidor, COUNT(hp.id_historico) AS total_analises
 FROM Servidor s
 JOIN Historico_Processamento hp ON s.id_servidor = hp.id_servidor
-GROUP BY s.nome_servidor
+GROUP BY s.codigo_servidor
 ORDER BY total_analises DESC;
 
 -- 11 Relatório completo de documentos e UGs
-SELECT d.id_documento, d.tipo_documento, d.data_criacao, u.codigo_ug, u.responsavel_ug
+SELECT d.id_documento, d.tipo_documento, d.data_criacao, u.codigo_ug, u.id_responsavel_ug
 FROM Documento d
 JOIN Unidade_Gestora u ON d.id_unidade_gestora = u.id_unidade_gestora
 ORDER BY d.data_criacao DESC;
@@ -257,6 +260,7 @@ Este documento descreve um fluxo completo de trabalho em design de banco de dado
 4.  **Implementação Física:** Geração de scripts SQL para criar as tabelas no MySQL.
 5.  **População de Dados:** Inserção de dados de exemplo para facilitar testes e demonstrações.
 6.  **Elaboração de Consultas SQL:** Desenvolvimento de queries para extrair informações relevantes do banco de dados, abrangendo diferentes níveis de complexidade.
+7.  **Adequação à LGPD:** Substituição dos identificadores nominais de servidores por pseudônimos (`SRV-0N`) e remoção de nomes de terceiros das descrições, DDL, cargas de exemplo e consultas.
 
 A modelagem apresentada sustenta a construção de sistemas de informação eficazes e a gestão estruturada dos dados contábeis.
 
