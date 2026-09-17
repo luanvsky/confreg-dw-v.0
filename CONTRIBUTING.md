@@ -97,7 +97,7 @@ docs(governanca): detalha matriz de classificação de dados
 
 A consistência de nomenclatura é um requisito de governança: nomes previsíveis são o primeiro passo para um catálogo de dados confiável.
 
-- Use **letras minúsculas**, com palavras separadas por hífen ou sublinhado: `docs-victor-2025-02.xlsx`.
+- Use **letras minúsculas**, com palavras separadas por hífen ou sublinhado: `docs-<responsavel>-2025-02.xlsx`.
 - **Não use espaços, parênteses ou acentos** em nomes de arquivos versionados.
 - Datas no formato `AAAA-MM` ou `AAAA-MM-DD`.
 - Versões de dashboard com sufixo `_vN` ou `_vN.M` — nunca `v5.` ou `version 2`.
@@ -121,9 +121,11 @@ Para evitar ambiguidade entre arquivos com o mesmo nome:
 Este repositório é **público**. Antes de commitar qualquer artefato, verifique:
 
 - ❌ **Não** inclua dados pessoais identificáveis (nomes de servidores, matrículas, CPF, e-mails institucionais) sem anonimização.
+- ❌ **Não** inclua extrações contendo identificação de **terceiros** — beneficiários e favorecidos de pagamento, fornecedores, prestadores. Esse dado é o objeto da análise de conformidade, **não pode ser descaracterizado** e, por isso, pertence a armazenamento controlado, não ao versionamento.
 - ❌ **Não** inclua links internos de compartilhamento (SharePoint, OneDrive, drives corporativos) nem credenciais, tokens ou chaves de API.
 - ❌ **Não** inclua arquivos temporários de ferramentas de escritório (`~$*.xlsx`, `*.pbix~`, `.pbiV5`).
 - ✅ Anonimize identificadores antes da publicação, mantendo um dicionário de correspondência fora do repositório.
+- ✅ Antes de versionar qualquer extração, aplique a triagem: **este arquivo contém identificação de alguém que não participou do projeto?** Se sim, ele não pertence ao versionamento.
 - ✅ Registre a origem, a periodicidade e o responsável de cada conjunto de dados em [`docs/fontes-de-dados.md`](./docs/fontes-de-dados.md).
 
 Consulte [`docs/governanca-de-dados.md`](./docs/governanca-de-dados.md) para a matriz de classificação de dados e as diretrizes de tratamento.

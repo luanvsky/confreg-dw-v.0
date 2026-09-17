@@ -85,15 +85,16 @@ Todo dado tratado no projeto deve ser classificado antes de ser armazenado ou pu
 | --- | --- | --- |
 | `dashboard/pbix/*.pbix` | 🟠 Restrito | O modelo de dados embutido mantém identificação nominal dos integrantes — ver [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) |
 | `dashboard/README.md`, `docs/arquitetura.md` | 🟢 Público | Documentação técnica |
-| `dataset/planilhas/impconfreg_2023_v2_*.csv/.tsv` | 🟠 Restrito | Coluna `servidor` **pseudonimizada** (`SRV-0N`); o restante do conteúdo é registro contábil |
-| `dataset/planilhas/*.xlsx` | 🟠 Restrito | Contêm identificação de terceiros (beneficiários e fornecedores) inerente ao registro contábil |
-| `dataset/planilhas/docs-*.xlsx` | 🟡 Interno | Listas de trabalho; nomes de arquivo referenciam integrantes |
+| `dataset/planilhas/impconfreg_2023_v2_reitoria.csv` / `.tsv` | 🟠 Restrito | Coluna `servidor` **pseudonimizada** (`SRV-0N`); o restante do conteúdo é registro contábil |
+| `dataset/planilhas/impconfreg_2023_v2.xlsx` | 🟠 Restrito | Extração consolidada; varredura não localizou CPF nem e-mail institucional |
+| `dataset/planilhas/impconfreg_2023_v2_geral.tsv` | 🟡 Interno | Agregação por tipo de documento; sem identificação pessoal |
+| Extrações em armazenamento controlado (5 arquivos) | 🔴 Restrito — dados pessoais de terceiros | **Não versionadas.** Identificação de beneficiários e favorecidos, CPFs e e-mails institucionais — ver [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório) |
 | `docs/relatorios/analise-documental-2025.md` | 🟠 Restrito | Produtividade individual associada a código pseudônimo |
 | `docs/unidades-gestoras.md` | 🟠 Restrito | Associa unidades gestoras a código pseudônimo |
 | `docs/termo-referencia-aquisicao-bi.md` | 🟡 Interno | Documento administrativo de contratação |
 | `apps/**` | 🟢 Público | Código-fonte de protótipos |
 
-> **Recomendação.** Os artefatos classificados como 🟠 Restrito devem ser movidos para armazenamento institucional controlado. Enquanto permanecerem neste repositório público, o acesso deve ser tratado como **já divulgado**, com registro expresso da decisão — é o caso das bases de conformidade, mantidas por exigência de reprodutibilidade da pesquisa.
+> **Recomendação.** Os artefatos classificados como 🟠 Restrito devem ser movidos para armazenamento institucional controlado. Enquanto permanecerem neste repositório público, o acesso deve ser tratado como **já divulgado**, com registro expresso da decisão — é o caso das bases de conformidade, mantidas por exigência de reprodutibilidade da pesquisa. Os artefatos classificados como 🔴 Restrito com dados pessoais de terceiros não admitem essa exceção e foram retirados do versionamento.
 
 ---
 
@@ -201,8 +202,8 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 | --- | --- | --- | --- |
 | Nome do integrante responsável pela análise | Documentação, bases redistribuídas e arquivos `.xlsx` | Distribuição de carga de trabalho e acompanhamento de produtividade | ✅ **Pseudonimizado** para código `SRV-0N` |
 | Métricas individuais de produtividade | Relatório de análise documental | Gestão da força de trabalho | Mantidas, agora vinculadas apenas a código |
-| E-mail institucional | Colunas de controle das bases `.xlsx` | Contato operacional | ⚠️ Identificado, supressão pendente de decisão |
-| Nome de terceiros (beneficiários, fornecedores) | Conteúdo das bases `.xlsx` | Objeto próprio da análise de conformidade | ⚠️ Mantido — dado inerente ao registro contábil; exposição em revisão |
+| E-mail institucional | Colunas de controle das bases `.xlsx` | Contato operacional | ✅ **Removido do versionamento** — arquivos em armazenamento controlado |
+| Nome de terceiros (beneficiários e favorecidos) | Conteúdo das bases `.xlsx` | Objeto próprio da análise de conformidade | ✅ **Removido do versionamento** — arquivos em armazenamento controlado |
 | Identificação de unidade gestora | Todo o fluxo | Análise por unidade | Mantida — dado institucional, não pessoal |
 
 ### Pseudonimização e minimização
@@ -212,22 +213,51 @@ A identificação nominal dos integrantes foi substituída por **código pseudô
 | Item | Definição |
 | --- | --- |
 | **Esquema de código** | `SRV-01` a `SRV-05`, atribuídos por ordem alfabética do nome original |
-| **Escopo** | Nomes em documentos `.md`; coluna `servidor` das bases `.csv`/`.tsv`; células, listas de seleção e comentários dos arquivos `.xlsx` |
+| **Escopo** | Nomes em documentos `.md`; coluna `servidor` e texto livre de observação das bases `.csv`/`.tsv`; células, listas de seleção e comentários dos arquivos `.xlsx` |
 | **Métricas agregadas** | Preservadas integralmente — a substituição alterou apenas a identificação, não os valores |
 | **Correspondência código ↔ pessoa** | **Não versionada.** Mantida pelo responsável pelo tratamento dos dados, fora do controle de versão |
 | **Natureza jurídica** | **Pseudonimização, não anonimização** — o código é reversível por quem detém a tabela de correspondência, e a combinação de unidade gestora, percentual de participação e período permite identificação indireta |
 
 A convenção aplicada está descrita em [unidades-gestoras.md](./unidades-gestoras.md#convenções-de-identificação).
 
+### Dados pessoais de terceiros
+
+As extrações do projeto contêm identificação de **pessoas alheias à equipe**: beneficiários e favorecidos de pagamento, além de endereços de e-mail institucional em colunas de controle. Esse conteúdo é **inerente ao registro contábil** — removê-lo ou substituí-lo destruiria o valor de auditoria do próprio dado, que é o objeto da análise de conformidade.
+
+O tratamento aplicado não foi a pseudonimização, e sim a **segregação**: em 16/09/2026 os cinco arquivos afetados foram retirados do versionamento e passaram a existir apenas em armazenamento controlado, fora da árvore de trabalho.
+
+| Arquivo | Dados pessoais identificados na varredura |
+| --- | --- |
+| `impconfreg_2023_v2_reitoria.xlsx` | 83 CPFs formatados distintos; 313 sequências de 11 dígitos; 2 e-mails institucionais |
+| `docs-victor-2025-02.xlsx` | 4 CPFs formatados; coluna `Favorecido Doc.`; 156 sequências de 11 dígitos |
+| `docs-victor-2025-03.xlsx` | 5 CPFs formatados; coluna `Favorecido Doc.`; 119 sequências de 11 dígitos |
+| `docs-victor-formatacao.tsv` | 5 CPFs formatados; coluna `Favorecido Doc.` |
+| `docs-responsavel-2-formatacao.tsv` | 5 CPFs formatados |
+
+Os contadores são **distintos** e provêm de varredura por expressão regular sobre o conteúdo textual dos arquivos. Duas ressalvas de método: sequências de onze dígitos podem corresponder a códigos de documento, e não a CPF; e a varredura cobre o texto extraído dos arquivos, não o conteúdo comprimido — portanto os números são um **piso**, não um total exato.
+
+**Tratamento:**
+
+| Item | Definição |
+| --- | --- |
+| **Medida aplicada** | Retirada do versionamento, não pseudonimização — o dado não pode ser descaracterizado sem perder a função probatória |
+| **Localização atual** | Diretório de armazenamento controlado, fora do repositório, com leitor próprio descrevendo procedência, hashes de integridade e regras de uso |
+| **Salvaguarda técnica** | Os cinco caminhos permanecem bloqueados no `.gitignore`, impedindo o retorno acidental ao versionamento |
+| **Base legal** | Execução de políticas públicas e cumprimento de obrigação legal, no âmbito da conformidade de registro de gestão |
+| **Acesso** | Restrito a quem executa a análise; sem redistribuição |
+
+> ⚠️ **Ressalva relevante.** A segregação limita a exposição **a partir deste ponto**, mas não a elimina retroativamente: os arquivos permanecem recuperáveis no histórico do Git, registrado como [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório). Enquanto a decisão sobre a reescrita do histórico não for tomada, o repositório deve ser tratado como contendo dados pessoais de terceiros em seu histórico.
+
 ### Medidas adotadas e recomendadas
 
 - **Minimização:** os painéis expõem indicadores agregados, não registros individuais.
-- **Pseudonimização na publicação:** o campo `servidor` foi substituído por código em todas as bases redistribuídas.
+- **Pseudonimização na publicação:** o campo `servidor`, o texto livre de observação das bases redistribuídas e os campos nominais dos arquivos `.xlsx` foram substituídos por código.
+- **Segregação:** os arquivos com identificação de terceiros foram retirados do versionamento e mantidos em armazenamento controlado.
 - **Controle de finalidade:** o uso dos dados é restrito à análise de conformidade e à gestão da força de trabalho.
 - **Revisão de exposição:** artefatos classificados como 🟠 Restrito não deveriam ser mantidos em repositório público.
 - **Registro de decisão:** toda divulgação externa deve ser precedida de avaliação formal.
 
-> **Alerta de conformidade.** A presença de nomes de servidores e de métricas individuais de produtividade em repositório público caracterizou exposição de dados pessoais (registrada em [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)). A mitigação na árvore atual está concluída; a exposição residual no histórico do Git e nos arquivos `.pbix` permanece e depende de decisão do responsável pelo tratamento dos dados.
+> **Alerta de conformidade.** A presença de nomes de servidores e de métricas individuais de produtividade em repositório público caracterizou exposição de dados pessoais (registrada em [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)). A presença de identificação de terceiros em escala caracterizou exposição adicional ([`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório)). A mitigação na árvore atual está concluída; a exposição residual no histórico do Git e nos arquivos `.pbix` permanece e depende de decisão do responsável pelo tratamento dos dados.
 
 ---
 
@@ -241,6 +271,7 @@ A convenção aplicada está descrita em [unidades-gestoras.md](./unidades-gesto
 | **Atualização agendada monitorada** | Verificação diária da atualização do conjunto de dados | ✅ |
 | **Links públicos controlados** | Publicação apenas de conteúdos classificados como 🟢 Público | ⚠️ Requer revisão |
 | **Pseudonimização** | Identificação nominal dos integrantes substituída por código `SRV-0N` nos artefatos de texto e nas bases redistribuídas | ✅ Aplicada — pendente nos `.pbix` ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
+| **Segregação de dados de terceiros** | Arquivos com identificação de beneficiários e favorecidos retirados do versionamento e mantidos em armazenamento controlado, com caminhos bloqueados no `.gitignore` | ✅ Aplicada — exposição residual no histórico ([`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório)) |
 | **Gestão de credenciais e links compartilhados** | Nenhuma credencial, token ou link interno versionado | ⚠️ Incidente `INC-01` identificado no histórico — ver [Registro de incidentes](#registro-de-incidentes-de-exposição) |
 
 ---
@@ -250,7 +281,7 @@ A convenção aplicada está descrita em [unidades-gestoras.md](./unidades-gesto
 | # | Risco | Probabilidade | Impacto | Controle |
 | --- | --- | --- | --- | --- |
 | R1 | Indicador incorreto utilizado em decisão de gestão | Média | Alto | Conferência de totais contra a origem; versionamento dos `.pbix` |
-| R2 | Exposição de dados pessoais em repositório público | Média | Alto | Pseudonimização aplicada na documentação e nas bases redistribuídas ([`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)); exposição residual no histórico e nos `.pbix` |
+| R2 | Exposição de dados pessoais de integrantes em repositório público | Média | Alto | Pseudonimização aplicada na documentação e nas bases redistribuídas ([`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)); exposição residual no histórico e nos `.pbix` |
 | R3 | Quebra da consulta por alteração da estrutura da planilha | Média | Médio | Monitoramento diário; padronização de colunas |
 | R4 | Duplicidade de registros inflando indicadores | Média | Alto | Regra de unicidade `R02` |
 | R5 | Falha silenciosa na atualização agendada | Média | Alto | Verificação diária do status de atualização |
@@ -260,6 +291,7 @@ A convenção aplicada está descrita em [unidades-gestoras.md](./unidades-gesto
 | R9 | Link de compartilhamento interno com token de acesso exposto em histórico de repositório público | Média | Alto | Revogação do compartilhamento na origem; proibição de versionar URLs internas ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
 | R10 | Identificação nominal residual no modelo embutido dos `.pbix` e nos relatórios publicados | Alta | Médio | Regeneração dos painéis a partir das bases pseudonimizadas e republicação ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
 | R11 | Reidentificação indireta por cruzamento das métricas individuais com bases públicas do Instituto | Média | Médio | Agregação das métricas ou substituição do código de projeto por código funcional institucional |
+| R12 | Dados pessoais de terceiros recuperáveis no histórico do repositório público, apesar da remoção da árvore atual | Alta | Alto | Reescrita do histórico com `git filter-repo`, ou recriação do repositório ([`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório)) |
 
 ---
 
@@ -272,6 +304,7 @@ Registro das ocorrências de exposição de informação identificadas no reposi
 | [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso) | Link interno com token de acesso no histórico | 🔲 Aguardando revogação na origem |
 | [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados) | Identificação nominal de integrantes em artefatos versionados | ✅ Mitigado na árvore atual |
 | [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) | Identificação nominal residual no modelo embutido dos `.pbix` | 🔲 Requer regeneração e republicação |
+| [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório) | Dados pessoais de terceiros em extrações versionadas e no histórico | ⚠️ Mitigado na árvore atual — histórico pendente |
 
 ### INC-01 — Link de compartilhamento interno com token de acesso
 
@@ -347,6 +380,35 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 
 > **Recomendação.** Enquanto a regeneração não for concluída, os arquivos `.pbix` são classificados como 🟠 Restrito e os relatórios publicados não devem ser compartilhados com público externo. Regenerar é preferível a editar: além de eliminar a identificação, reconstrói o modelo a partir de uma fonte verificada.
 
+### INC-04 — Dados pessoais de terceiros no histórico do repositório
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Identificador** | `INC-04` |
+| **Data de detecção** | 16/09/2026 |
+| **Detectado por** | Auditoria de dados pessoais nos artefatos redistribuídos, posterior à pseudonimização dos integrantes |
+| **Natureza** | Extrações versionadas em repositório público contendo identificação de pessoas alheias à equipe: beneficiários e favorecidos de pagamento, números com formato de CPF e endereços de e-mail institucional |
+| **Artefatos** | `impconfreg_2023_v2_reitoria.xlsx`, `docs-victor-2025-02.xlsx`, `docs-victor-2025-03.xlsx`, `docs-victor-formatacao.tsv`, `docs-responsavel-2-formatacao.tsv` |
+| **Classificação do conteúdo** | 🔴 Pessoal — dado de terceiros |
+| **Amplitude** | Cinco arquivos; 83 CPFs formatados distintos no conjunto mais extenso; 313 sequências de 11 dígitos no mesmo arquivo |
+| **Causa raiz** | A classificação inicial tratou como "dados operacionais" bases que contêm identificação de terceiros. A distinção entre identificação de integrantes e identificação de terceiros não havia sido feita, o que direcionou a primeira remediação apenas para os nomes da equipe |
+| **Decisão** | **Segregar**, não pseudonimizar — o dado de terceiro é o objeto da análise de conformidade e perderia a função probatória se descaracterizado. Os cinco arquivos foram retirados do versionamento e movidos para armazenamento controlado, com os caminhos bloqueados no `.gitignore` |
+| **Exposição na árvore atual** | Não — verificada a ausência de CPF e de e-mail nos quatro arquivos remanescentes |
+| **Exposição residual** | **Sim.** Os cinco arquivos continuam recuperáveis no histórico do Git em commits anteriores, acessíveis a quem conheça o SHA. A segregação protege o estado atual, não o passado |
+| **Status** | ⚠️ Mitigado na árvore atual — decisão sobre o histórico pendente |
+
+**Sobre a decisão de não reescrever o histórico.** A justificativa registrada em [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso) sustenta-se em um link revogável na origem. **Esse argumento não se aplica aqui:** não existe "origem" a revogar para um arquivo que é, ele próprio, o dado. As três razões originais precisam ser reavaliadas isoladamente para este incidente:
+
+| Razão original | Aplica-se ao `INC-04`? |
+| --- | --- |
+| O token já é público há mais de dois anos; apagar não desfaz a exposição | Parcialmente — a exposição passada não é revertida, mas a reescrita interrompe o acesso continuado |
+| A revogação na origem é a única mitigação efetiva | **Não** — não há origem revogável; a reescrita do histórico é a única mitigação disponível |
+| A reescrita invalida SHAs e quebra clones e *forks* | Sim — porém o custo recai sobre um repositório de um único mantenedor |
+
+> **Recomendação.** Avaliar a reescrita do histórico (`git filter-repo` + *force push*) **especificamente para os cinco arquivos deste incidente**. Alternativa de menor custo: recriar o repositório público a partir do estado atual, preservando o histórico original em cópia privada ou em arquivamento fora do GitHub.
+
+> **Recomendação permanente.** Antes de versionar qualquer extração, aplicar a pergunta de triagem: *este arquivo contém identificação de alguém que não participou do projeto?* Se sim, a classificação é 🔴 Restrito e o arquivo não pertence ao versionamento.
+
 ---
 
 ## Indicadores de governança
@@ -361,6 +423,8 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 | Cobertura de pseudonimização | Artefatos com identificação nominal tratada ÷ artefatos com identificação nominal | 100% |
 | Defasagem de pseudonimização | Bases com dado pessoal não tratado | 0 |
 | Identificação nominal em artefatos derivados | Arquivos `.pbix` com nomes próprios no modelo embutido | 0 |
+| Arquivos com dados de terceiros versionados | Extrações versionadas contendo CPF, nome de favorecido ou e-mail institucional | 0 |
+| Recuperabilidade histórica de dados pessoais | Incidentes de exposição cujo conteúdo permanece recuperável no histórico | 0 |
 | Links internos versionados | URLs com token de acesso presentes em artefatos versionados | 0 |
 | Incidentes de exposição abertos | Incidentes com status diferente de concluído | 0 |
 
@@ -381,13 +445,13 @@ Nível 5 — Otimizado      Validação automatizada; alertas proativos; melhori
 ### Ações prioritárias
 
 1. Revogar o compartilhamento do arquivo `CONFREG.xlsx` na origem (incidente `INC-01`).
-2. Regenerar os painéis a partir das bases pseudonimizadas e republicá-los (`INC-03`).
-3. Decidir sobre a supressão dos e-mails institucionais das bases `.xlsx` (`INC-02`).
-4. Revisar a exposição de identificação de terceiros nas bases `.xlsx`.
-5. Revisar a classificação e a exposição dos artefatos restritos.
-6. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
-7. Formalizar o catálogo de dados com responsáveis nomeados.
-8. Implantar segurança em nível de linha nos painéis publicados.
+2. **Decidir sobre a reescrita do histórico do Git** para os cinco arquivos com dados de terceiros (`INC-04`) — é a única mitigação capaz de interromper a recuperabilidade dos dados pessoais.
+3. Regenerar os painéis a partir das bases pseudonimizadas e republicá-los (`INC-03`).
+4. Revisar a classificação e a exposição dos artefatos restritos.
+5. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
+6. Formalizar o catálogo de dados com responsáveis nomeados.
+7. Implantar segurança em nível de linha nos painéis publicados.
+8. Estabelecer a triagem de dados de terceiros como etapa obrigatória antes de qualquer versionamento.
 
 ---
 

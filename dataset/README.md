@@ -41,13 +41,27 @@ Os arquivos `.pbix` que estavam em `.pbi/` foram consolidados em [`../dashboard/
 | --- | --- | --- | --- | --- |
 | [`impconfreg_2023_v2.xlsx`](./planilhas/impconfreg_2023_v2.xlsx) | Base consolidada de conformidade — extração principal; identificação de integrantes pseudonimizada | `.xlsx` | 2023 | 🟠 Restrito |
 | [`impconfreg_2023_v2_geral.tsv`](./planilhas/impconfreg_2023_v2_geral.tsv) | Recorte consolidado geral em texto delimitado — agregação por tipo de documento, sem identificação pessoal | `.tsv` | 2023 | 🟡 Interno |
-| [`impconfreg_2023_v2_reitoria.xlsx`](./planilhas/impconfreg_2023_v2_reitoria.xlsx) | Recorte da unidade gestora Reitoria; identificação de integrantes pseudonimizada | `.xlsx` | 2023 | 🟠 Restrito |
 | [`impconfreg_2023_v2_reitoria.csv`](./planilhas/impconfreg_2023_v2_reitoria.csv) | Recorte da unidade gestora Reitoria; coluna `servidor` pseudonimizada | `.csv` | 2023 | 🟠 Restrito |
 | [`impconfreg_2023_v2_reitoria.tsv`](./planilhas/impconfreg_2023_v2_reitoria.tsv) | Recorte da unidade gestora Reitoria; coluna `servidor` pseudonimizada | `.tsv` | 2023 | 🟠 Restrito |
-| [`docs-victor-formatacao.tsv`](./planilhas/docs-victor-formatacao.tsv) | Base de trabalho para padronização de formatação | `.tsv` | — | 🟠 Restrito |
-| [`docs-responsavel-2-formatacao.tsv`](./planilhas/docs-responsavel-2-formatacao.tsv) | Base de trabalho para padronização de formatação | `.tsv` | — | 🟠 Restrito |
-| [`docs-victor-2025-02.xlsx`](./planilhas/docs-victor-2025-02.xlsx) | Extração mensal de acompanhamento | `.xlsx` | Fev/2025 | 🟡 Interno |
-| [`docs-victor-2025-03.xlsx`](./planilhas/docs-victor-2025-03.xlsx) | Extração mensal de acompanhamento | `.xlsx` | Mar/2025 | 🟡 Interno |
+
+### Retirados do repositório — armazenamento controlado
+
+Cinco arquivos foram **removidos do versionamento em 16/09/2026** por conterem dados pessoais de terceiros (identificação de beneficiários e favorecidos, números com formato de CPF e endereços de e-mail institucional). Eles existem apenas fora da árvore de trabalho, em armazenamento controlado.
+
+| Arquivo retirado | Dados pessoais identificados |
+| --- | --- |
+| `impconfreg_2023_v2_reitoria.xlsx` | ~83 CPFs formatados distintos; ~313 sequências de 11 dígitos; 2 e-mails institucionais |
+| `docs-victor-2025-02.xlsx` | 4 CPFs formatados; coluna `Favorecido Doc.`; ~156 sequências de 11 dígitos |
+| `docs-victor-2025-03.xlsx` | 5 CPFs formatados; coluna `Favorecido Doc.`; ~119 sequências de 11 dígitos |
+| `docs-victor-formatacao.tsv` | 5 CPFs formatados; coluna `Favorecido Doc.` |
+| `docs-responsavel-2-formatacao.tsv` | 5 CPFs formatados |
+
+Os contadores são **distintos** e resultam de varredura por expressão regular sobre o conteúdo textual dos arquivos, não de conferência nominal caso a caso. Hashes SHA-256 de integridade e regras de uso constam do leitor do diretório de armazenamento.
+
+O `.gitignore` mantém os caminhos bloqueados, impedindo que retornem por engano ao versionamento. Detalhes do controle em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#dados-pessoais-de-terceiros).
+
+> ⚠️ **Limitação.** A remoção vale para o estado atual do repositório. Os arquivos **continuam recuperáveis no histórico do Git**, em commits anteriores. Ver [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório).
+
 
 ### `imagens/` — recursos de documentação
 
@@ -64,15 +78,17 @@ Os recortes `impconfreg_2023_v2*` foram mantidos em três extensões (`xlsx`, `c
 
 ### Divergência entre extensão e formato
 
-Três arquivos deste diretório têm extensão que não corresponde ao formato real do conteúdo:
+A extensão `.tsv` deste acervo **não é um indicador confiável de formato**. Entre os arquivos que permanecem versionados:
 
 | Arquivo | Extensão | Formato real | Observação |
 | --- | --- | --- | --- |
-| [`docs-victor-formatacao.tsv`](./planilhas/docs-victor-formatacao.tsv) | `.tsv` | `.xlsx` (ZIP) | Abrir com ferramenta de planilha ou renomear para `.xlsx`. Uma leitura por `pandas.read_csv` falha. |
-| [`docs-responsavel-2-formatacao.tsv`](./planilhas/docs-responsavel-2-formatacao.tsv) | `.tsv` | `.xlsx` (ZIP) | Idem. |
 | [`impconfreg_2023_v2_reitoria.tsv`](./planilhas/impconfreg_2023_v2_reitoria.tsv) | `.tsv` | Texto **separado por vírgula** | Não contém nenhum caractere de tabulação; é uma duplicata byte a byte do `.csv` correspondente. |
+| [`impconfreg_2023_v2_geral.tsv`](./planilhas/impconfreg_2023_v2_geral.tsv) | `.tsv` | Texto separado por tabulação | Formato coerente com a extensão. |
 
-O arquivo [`impconfreg_2023_v2_geral.tsv`](./planilhas/impconfreg_2023_v2_geral.tsv), por outro lado, é de fato delimitado por tabulação — ou seja, a extensão `.tsv` do acervo **não é um indicador confiável de formato**, e a leitura deve sempre ser precedida de inspeção do separador.
+Dois arquivos hoje em armazenamento controlado (`docs-victor-formatacao.tsv` e `docs-responsavel-2-formatacao.tsv`) eram, na verdade, **pastas compactadas `.xlsx`** exportadas com extensão incorreta. Como deixaram de ser versionados, a leitura por `pandas.read_csv` deixou de ser um risco no repositório — mas o histórico do Git preserva essa ambiguidade.
+
+Como regra geral, inspecione o separador antes de carregar qualquer arquivo deste diretório.
+
 
 ---
 
@@ -81,12 +97,13 @@ O arquivo [`impconfreg_2023_v2_geral.tsv`](./planilhas/impconfreg_2023_v2_geral.
 | Nível | Arquivos | Tratamento |
 | --- | --- | --- |
 | 🟢 **Público** | Imagens | Uso livre |
-| 🟡 **Interno** | Bases consolidadas e recortes mensais | Uso restrito a atividades de conformidade; não redistribuir sem revisão |
+| 🟡 **Interno** | Agregações consolidadas | Uso restrito a atividades de conformidade; não redistribuir sem revisão |
 | 🟠 **Restrito** | Recortes de conformidade | Acesso restrito; a identificação dos integrantes foi pseudonimizada (`SRV-0N`) |
+| 🔴 **Restrito — dados pessoais de terceiros** | Fora do repositório | Não versionado; armazenamento controlado com acesso nominal |
 
-> ✅ **Minimização aplicada.** A coluna `servidor` dos recortes `impconfreg_2023_v2_reitoria.*` e dos arquivos `.xlsx` foi **pseudonimizada**: os nomes foram substituídos pelos códigos `SRV-01` a `SRV-05`, e as métricas agregadas foram preservadas integralmente. A tabela de correspondência entre código e pessoa **não é versionada** — procedimento em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#pseudonimização-e-minimização).
+> ✅ **Minimização aplicada.** A coluna `servidor` e o texto livre de observação dos recortes `impconfreg_2023_v2_reitoria.*` foram **pseudonimizados**: os nomes foram substituídos pelos códigos `SRV-01` a `SRV-05`, e as métricas agregadas foram preservadas integralmente. A tabela de correspondência entre código e pessoa **não é versionada** — procedimento em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#pseudonimização-e-minimização).
 
-> ⚠️ **Atenção.** O conteúdo restante dessas bases contém identificação de **terceiros** (beneficiários e fornecedores) inerente ao registro contábil, além de endereços de e-mail institucional em colunas de controle. Reutilize os arquivos apenas em atividades de conformidade e não os redistribua sem revisão de classificação.
+> ✅ **Segregação aplicada.** Os arquivos com identificação de terceiros foram **retirados do versionamento** e mantidos fora da árvore de trabalho. Os quatro arquivos que permanecem no diretório foram verificados e **não contêm CPF nem endereço de e-mail**.
 
 Nenhum arquivo deste diretório está coberto pela licença MIT do software — os dados permanecem sujeitos às restrições institucionais de origem. Consulte [../LICENSE](../LICENSE).
 
@@ -99,9 +116,9 @@ Nenhum arquivo deste diretório está coberto pela licença MIT do software — 
 | Base principal | `<origem>_<ano>_v<N>` | `impconfreg_2023_v2.xlsx` |
 | Recorte por unidade | `<base>_<unidade>` | `impconfreg_2023_v2_reitoria.csv` |
 | Recorte consolidado | `<base>_geral` | `impconfreg_2023_v2_geral.tsv` |
-| Extração mensal | `docs-<responsavel>-<AAAA-MM>` | `docs-victor-2025-02.xlsx` |
+| Extração mensal | `docs-<responsavel>-<AAAA-MM>` | `docs-<responsavel>-2025-02.xlsx` |
 
-O padrão completo, com as regras aplicáveis a todo o repositório, está em [../CONTRIBUTING.md](../CONTRIBUTING.md).
+O padrão completo, com as regras aplicáveis a todo o repositório, está em [../CONTRIBUTING.md](../CONTRIBUTING.md). As extrações mensais seguem o padrão de nome, porém não são versionadas — ver [Retirados do repositório](#retirados-do-repositório--armazenamento-controlado).
 
 ---
 
@@ -124,10 +141,10 @@ O caderno [`../notebooks/impconfreg.ipynb`](../notebooks/impconfreg.ipynb) cont�
 - [ ] **Incluir a base `v8` e o arquivo `confreg.txt.xlsx`** — pendência herdada do acervo original.
 - [ ] **Documentar o dicionário de dados das extrações** — descrição de cada coluna, tipo e regra de preenchimento (previsto em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md)).
 - [x] **Substituir a coluna `servidor` por código identificador** nos recortes destinados a compartilhamento — concluído em 16/09/2026, com os códigos `SRV-01` a `SRV-05`.
-- [ ] **Decidir sobre a supressão dos endereços de e-mail institucional** presentes nas colunas de controle dos arquivos `.xlsx`.
-- [ ] **Corrigir a extensão dos arquivos `docs-*-formatacao.tsv`**, que são planilhas `.xlsx` com extensão incorreta.
+- [x] **Retirar do versionamento os arquivos com dados pessoais de terceiros** — concluído em 16/09/2026; cinco arquivos movidos para armazenamento controlado externo e caminhos bloqueados no `.gitignore`.
+- [ ] **Avaliar a reescrita do histórico do Git** — a remoção não apaga os arquivos dos commits anteriores; em repositório público eles seguem recuperáveis por SHA. Ver `INC-04` em [../docs/governanca-de-dados.md](../docs/governanca-de-dados.md#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório).
 - [ ] **Corrigir a extensão de `impconfreg_2023_v2_reitoria.tsv`** — o arquivo é separado por vírgula, não por tabulação.
-- [ ] **Avaliar a consolidação dos formatos duplicados** (`xlsx`/`csv`/`tsv`) em um formato único com script de conversão versionado.
+- [ ] **Avaliar a consolidação dos formatos duplicados** (`csv`/`tsv`) em um formato único com script de conversão versionado.
 
 ---
 

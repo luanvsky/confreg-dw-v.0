@@ -61,14 +61,25 @@ Os arquivos abaixo estão disponíveis em [`dataset/`](../dataset/) e classifica
 
 | Arquivo | Descrição | Classificação |
 | --- | --- | --- |
-| `impconfreg_2023_v2.xlsx` | Base consolidada de 2023 — extração principal | 🟡 Interno |
-| `impconfreg_2023_v2_geral.tsv` | Recorte consolidado geral, formato texto | 🟠 Restrito |
-| `impconfreg_2023_v2_reitoria.csv` / `.tsv` / `.xlsx` | Recorte da unidade gestora Reitoria | 🟠 Restrito |
-| `docs-victor-formatacao.tsv` | Base de trabalho para padronização de formatação | 🟠 Restrito |
-| `docs-responsavel-2-formatacao.tsv` | Base de trabalho para padronização de formatação | 🟠 Restrito |
-| `docs-victor-2025-02.xlsx` / `docs-victor-2025-03.xlsx` | Extrações mensais de acompanhamento (fevereiro e março de 2025) | 🟡 Interno |
+| `impconfreg_2023_v2.xlsx` | Base consolidada de 2023 — extração principal | 🟠 Restrito |
+| `impconfreg_2023_v2_geral.tsv` | Recorte consolidado geral, formato texto | 🟡 Interno |
+| `impconfreg_2023_v2_reitoria.csv` / `.tsv` | Recorte da unidade gestora Reitoria | 🟠 Restrito |
 
-> ⚠️ Os recortes `impconfreg` contêm a coluna `servidor` com identificação pessoal. Antes de qualquer redistribuição, esse campo deve ser substituído por código identificador, conforme a seção de privacidade de [governanca-de-dados.md](./governanca-de-dados.md).
+> ✅ Os recortes `impconfreg` que permanecem versionados não contêm CPF nem endereço de e-mail, e a coluna `servidor` foi substituída por código identificador (`SRV-0N`), conforme a seção de privacidade de [governanca-de-dados.md](./governanca-de-dados.md).
+
+### Extrações retiradas do versionamento
+
+Cinco arquivos deixaram de ser versionados em 16/09/2026 por conterem dados pessoais de terceiros — identificação de beneficiários e favorecidos, números com formato de CPF e e-mails institucionais. Passaram a existir apenas em armazenamento controlado, fora do repositório:
+
+| Arquivo | Motivo da retirada |
+| --- | --- |
+| `impconfreg_2023_v2_reitoria.xlsx` | Base completa da UG Reitoria — identificação de terceiros e e-mails institucionais |
+| `docs-victor-2025-02.xlsx` | Coluna `Favorecido Doc.` e CPFs |
+| `docs-victor-2025-03.xlsx` | Coluna `Favorecido Doc.` e CPFs |
+| `docs-victor-formatacao.tsv` | Coluna `Favorecido Doc.` e CPFs |
+| `docs-responsavel-2-formatacao.tsv` | CPFs |
+
+O detalhamento está em [../dataset/README.md](../dataset/README.md#retirados-do-repositório--armazenamento-controlado) e no incidente `INC-04` de [governanca-de-dados.md](./governanca-de-dados.md#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório).
 
 ---
 

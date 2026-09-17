@@ -85,3 +85,17 @@ tmp/
 *.zip
 *.bak
 *.orig
+
+# ---------------------------------------------------------------------------
+# Extrações com dados pessoais de terceiros — armazenamento controlado externo
+#
+# Estes arquivos contêm identificação de beneficiários e favorecidos, números
+# com formato de CPF e e-mails institucionais. Foram retirados do repositório
+# e mantidos fora da árvore de trabalho. As entradas abaixo impedem que sejam
+# adicionados novamente por engano. Detalhes e hashes de integridade em
+# dataset/README.md e docs/governanca-de-dados.md.
+# ---------------------------------------------------------------------------
+dataset/planilhas/impconfreg_2023_v2_reitoria.xlsx
+dataset/planilhas/docs-victor-2025-*.xlsx
+dataset/planilhas/docs-victor-formatacao.tsv
+dataset/planilhas/docs-responsavel-2-formatacao.tsv
