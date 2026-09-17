@@ -19,6 +19,7 @@ Este documento conecta as práticas de engenharia de dados adotadas no projeto �
 - [Privacidade e proteção de dados pessoais](#privacidade-e-proteção-de-dados-pessoais)
 - [Segurança e controle de acesso](#segurança-e-controle-de-acesso)
 - [Riscos e controles](#riscos-e-controles)
+- [Registro de incidentes de exposição](#registro-de-incidentes-de-exposição)
 - [Indicadores de governança](#indicadores-de-governança)
 - [Roteiro de maturidade](#roteiro-de-maturidade)
 - [Referências](#referências)
@@ -222,7 +223,7 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 | **Perfis de acesso** | Diferenciação entre administrador, curador e consumidor | 🔲 Proposto |
 | **Atualização agendada monitorada** | Verificação diária da atualização do conjunto de dados | ✅ |
 | **Links públicos controlados** | Publicação apenas de conteúdos classificados como 🟢 Público | ⚠️ Requer revisão |
-| **Gestão de credenciais** | Nenhuma credencial, token ou link interno versionado | 🔲 Auditoria necessária |
+| **Gestão de credenciais e links compartilhados** | Nenhuma credencial, token ou link interno versionado | ⚠️ Incidente `INC-01` identificado no histórico — ver [Registro de incidentes](#registro-de-incidentes-de-exposição) |
 
 ---
 
@@ -238,6 +239,47 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 | R6 | Perda da linhagem por rotatividade da equipe | Alta | Médio | Documentação neste diretório e no catálogo |
 | R7 | Divergência entre painel publicado e versão do `.pbix` | Média | Médio | Correspondência de identificadores de versão ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
 | R8 | Dependência de pessoa única (*bus factor*) | Alta | Médio | Versionamento em Git e documentação do processo |
+| R9 | Link de compartilhamento interno com token de acesso exposto em histórico de repositório público | Média | Alto | Revogação do compartilhamento na origem; proibição de versionar URLs internas ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
+
+---
+
+## Registro de incidentes de exposição
+
+Registro das ocorrências de exposição de informação identificadas no repositório, com a respectiva mitigação. O registro é mantido como evidência de diligência e como insumo para revisão das práticas de publicação.
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Identificador** | `INC-01` |
+| **Data de detecção** | 16/09/2026 |
+| **Detectado por** | Revisão de classificação e auditoria de conteúdo versionado |
+| **Natureza** | Link de compartilhamento interno com token de acesso (`?e=`) publicado em arquivo versionado |
+| **Artefato** | `dataset/.xls/readme.md` (removido da árvore atual na reestruturação; permanece no histórico) |
+| **Origem do link** | `[link-interno-removido]` — arquivo `CONFREG.xlsx` |
+| **Classificação do conteúdo** | 🟠 Restrito — planilha de controle da conformidade com potencial dado pessoal |
+| **Amplitude** | Um único compartilhamento, referenciado em três formatos de URL |
+| **Exposição na árvore atual** | Não — verificada ausência de URLs internas em todos os `.md` |
+| **Exposição no histórico** | Sim — commits anteriores a `bcf3fb0` |
+| **Decisão** | Revogar o compartilhamento na origem; **não** reescrever o histórico |
+| **Status** | 🔲 Aguardando revogação na origem |
+
+### Justificativa da decisão
+
+A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** por três razões:
+
+1. **O token já é público há mais de dois anos.** Qualquer agente pode já tê-lo capturado; apagar o histórico não desfaz a exposição passada.
+2. **A revogação na origem é a única mitigação efetiva.** Um link revogado deixa de conceder acesso independentemente de quem o possua.
+3. **Custo de coordenação.** A reescrita invalida todos os SHAs, quebrando clones, *forks* e referências existentes, sem ganho de segurança proporcional.
+
+### Ação de remediação requerida
+
+1. Acessar o OneDrive institucional (conta `@ifs.edu.br`).
+2. Abrir **Compartilhados** → **Gerenciados por mim**.
+3. Localizar o compartilhamento do arquivo `CONFREG.xlsx`.
+4. Selecionar **Gerenciar acesso** e **remover** os vínculos do tipo *Qualquer pessoa com o link* e *Pessoas da instituição com o link*.
+5. Confirmar que a planilha permanece acessível apenas aos proprietários legítimos.
+6. Atualizar o `Status` deste registro para ✅ Concluído, com a data.
+
+> **Recomendação permanente.** Links de compartilhamento institucional não devem ser versionados. Ao documentar uma fonte, registre o **sistema de origem** e a **forma de acesso institucional** — não a URL com token. Ver [fontes-de-dados.md](./fontes-de-dados.md).
 
 ---
 
@@ -251,6 +293,8 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 | Tempestividade da atualização | Atualizações dentro do prazo ÷ total de ciclos | ≥ 98% |
 | Exposição de dados pessoais | Artefatos restritos publicados | 0 |
 | Defasagem de anonimização | Bases com dado pessoal não tratado | 0 |
+| Links internos versionados | URLs com token de acesso presentes em artefatos versionados | 0 |
+| Incidentes de exposição abertos | Incidentes com status diferente de concluído | 0 |
 
 ---
 
@@ -268,11 +312,12 @@ Nível 5 — Otimizado      Validação automatizada; alertas proativos; melhori
 
 ### Ações prioritárias
 
-1. Anonimizar o campo `servidor` nas bases redistribuídas.
-2. Revisar a classificação e a exposição dos artefatos restritos.
-3. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
-4. Formalizar o catálogo de dados com responsáveis nomeados.
-5. Implantar segurança em nível de linha nos painéis publicados.
+1. Revogar o compartilhamento do arquivo `CONFREG.xlsx` na origem (incidente `INC-01`).
+2. Anonimizar o campo `servidor` nas bases redistribuídas.
+3. Revisar a classificação e a exposição dos artefatos restritos.
+4. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
+5. Formalizar o catálogo de dados com responsáveis nomeados.
+6. Implantar segurança em nível de linha nos painéis publicados.
 
 ---
 
