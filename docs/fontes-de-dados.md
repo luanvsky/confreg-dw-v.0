@@ -79,7 +79,7 @@ Cinco arquivos deixaram de ser versionados em 16/09/2026 por conterem dados pess
 | `docs-victor-formatacao.tsv` | Coluna `Favorecido Doc.` e CPFs |
 | `docs-responsavel-2-formatacao.tsv` | CPFs |
 
-O detalhamento está em [../dataset/README.md](../dataset/README.md#retirados-do-repositório--armazenamento-controlado) e no incidente `INC-04` de [governanca-de-dados.md](./governanca-de-dados.md#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório).
+O detalhamento está em [../dataset/README.md](../dataset/README.md#retirados-do-repositório--armazenamento-controlado) e nos incidentes `INC-04` e `INC-05` de [governanca-de-dados.md](./governanca-de-dados.md#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório). A remoção abrangeu também o **histórico alcançável** das ramificações publicadas, por reescrita com `git filter-repo`.
 
 ---
 

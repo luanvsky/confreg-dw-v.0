@@ -83,7 +83,7 @@ Todo dado tratado no projeto deve ser classificado antes de ser armazenado ou pu
 
 | Artefato | Classificação | Observação |
 | --- | --- | --- |
-| `dashboard/pbix/*.pbix` | 🟠 Restrito | O modelo de dados embutido mantém identificação nominal dos integrantes — ver [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) |
+| `dashboard/pbix/*.pbix` | 🟠 Restrito | O modelo de dados embutido de duas versões mantém identificação nominal de integrantes — ver [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) |
 | `dashboard/README.md`, `docs/arquitetura.md` | 🟢 Público | Documentação técnica |
 | `dataset/planilhas/impconfreg_2023_v2_reitoria.csv` / `.tsv` | 🟠 Restrito | Coluna `servidor` **pseudonimizada** (`SRV-0N`); o restante do conteúdo é registro contábil |
 | `dataset/planilhas/impconfreg_2023_v2.xlsx` | 🟠 Restrito | Extração consolidada; varredura não localizou CPF nem e-mail institucional |
@@ -246,7 +246,7 @@ Os contadores são **distintos** e provêm de varredura por expressão regular s
 | **Base legal** | Execução de políticas públicas e cumprimento de obrigação legal, no âmbito da conformidade de registro de gestão |
 | **Acesso** | Restrito a quem executa a análise; sem redistribuição |
 
-> ⚠️ **Ressalva relevante.** A segregação limita a exposição **a partir deste ponto**, mas não a elimina retroativamente: os arquivos permanecem recuperáveis no histórico do Git, registrado como [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório). Enquanto a decisão sobre a reescrita do histórico não for tomada, o repositório deve ser tratado como contendo dados pessoais de terceiros em seu histórico.
+> **Atualização de 16/09/2026.** A recuperabilidade retroativa foi tratada pela [reescrita do histórico](#reescrita-do-histórico): os cinco arquivos e os artefatos de `dataset/.xls/` deixaram de existir em qualquer commit alcançável das três ramificações publicadas. Restam dois resíduos que o `force push` não elimina — objetos antigos ainda recuperáveis por SHA direto até a coleta de lixo do GitHub, e as referências de *pull request* `47` e `92`. Ambos estão registrados em [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push).
 
 ### Medidas adotadas e recomendadas
 
@@ -257,7 +257,7 @@ Os contadores são **distintos** e provêm de varredura por expressão regular s
 - **Revisão de exposição:** artefatos classificados como 🟠 Restrito não deveriam ser mantidos em repositório público.
 - **Registro de decisão:** toda divulgação externa deve ser precedida de avaliação formal.
 
-> **Alerta de conformidade.** A presença de nomes de servidores e de métricas individuais de produtividade em repositório público caracterizou exposição de dados pessoais (registrada em [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)). A presença de identificação de terceiros em escala caracterizou exposição adicional ([`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório)). A mitigação na árvore atual está concluída; a exposição residual no histórico do Git e nos arquivos `.pbix` permanece e depende de decisão do responsável pelo tratamento dos dados.
+> **Alerta de conformidade.** A presença de nomes de servidores e de métricas individuais de produtividade em repositório público caracterizou exposição de dados pessoais (registrada em [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)). A presença de identificação de terceiros em escala caracterizou exposição adicional ([`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório)). A mitigação na árvore atual e no histórico alcançável está concluída. Permanecem abertas três frentes: a regeneração dos painéis (`.pbix`), a revogação do compartilhamento na origem e a remoção dos objetos que a plataforma retém fora do alcance do `force push`.
 
 ---
 
@@ -270,9 +270,10 @@ Os contadores são **distintos** e provêm de varredura por expressão regular s
 | **Perfis de acesso** | Diferenciação entre administrador, curador e consumidor | 🔲 Proposto |
 | **Atualização agendada monitorada** | Verificação diária da atualização do conjunto de dados | ✅ |
 | **Links públicos controlados** | Publicação apenas de conteúdos classificados como 🟢 Público | ⚠️ Requer revisão |
-| **Pseudonimização** | Identificação nominal dos integrantes substituída por código `SRV-0N` nos artefatos de texto e nas bases redistribuídas | ✅ Aplicada — pendente nos `.pbix` ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
-| **Segregação de dados de terceiros** | Arquivos com identificação de beneficiários e favorecidos retirados do versionamento e mantidos em armazenamento controlado, com caminhos bloqueados no `.gitignore` | ✅ Aplicada — exposição residual no histórico ([`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório)) |
-| **Gestão de credenciais e links compartilhados** | Nenhuma credencial, token ou link interno versionado | ⚠️ Incidente `INC-01` identificado no histórico — ver [Registro de incidentes](#registro-de-incidentes-de-exposição) |
+| **Pseudonimização** | Identificação nominal dos integrantes substituída por código `SRV-0N` nos artefatos de texto, nas bases redistribuídas e em todas as versões do histórico | ✅ Aplicada — pendente nos `.pbix` ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
+| **Segregação de dados de terceiros** | Arquivos com identificação de beneficiários e favorecidos retirados do versionamento e mantidos em armazenamento controlado, com caminhos bloqueados no `.gitignore` | ✅ Aplicada |
+| **Reescrita do histórico** | Remoção dos caminhos sensíveis e substituição de identificadores em todos os commits alcançáveis, com `git filter-repo` e `force push` sobre cópia integral do histórico original | ✅ Aplicada — resíduo em [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push) |
+| **Gestão de credenciais e links compartilhados** | Nenhuma credencial, token ou link interno versionado | ⚠️ [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso) — URLs eliminadas na reescrita, revogação na origem pendente |
 
 ---
 
@@ -281,17 +282,17 @@ Os contadores são **distintos** e provêm de varredura por expressão regular s
 | # | Risco | Probabilidade | Impacto | Controle |
 | --- | --- | --- | --- | --- |
 | R1 | Indicador incorreto utilizado em decisão de gestão | Média | Alto | Conferência de totais contra a origem; versionamento dos `.pbix` |
-| R2 | Exposição de dados pessoais de integrantes em repositório público | Média | Alto | Pseudonimização aplicada na documentação e nas bases redistribuídas ([`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)); exposição residual no histórico e nos `.pbix` |
+| R2 | Exposição de dados pessoais de integrantes em repositório público | Média | Alto | Pseudonimização aplicada na documentação, nas bases redistribuídas e no histórico alcançável ([`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)); exposição residual nos `.pbix` ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
 | R3 | Quebra da consulta por alteração da estrutura da planilha | Média | Médio | Monitoramento diário; padronização de colunas |
 | R4 | Duplicidade de registros inflando indicadores | Média | Alto | Regra de unicidade `R02` |
 | R5 | Falha silenciosa na atualização agendada | Média | Alto | Verificação diária do status de atualização |
 | R6 | Perda da linhagem por rotatividade da equipe | Alta | Médio | Documentação neste diretório e no catálogo |
 | R7 | Divergência entre painel publicado e versão do `.pbix` | Média | Médio | Correspondência de identificadores de versão ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
 | R8 | Dependência de pessoa única (*bus factor*) | Alta | Médio | Versionamento em Git e documentação do processo |
-| R9 | Link de compartilhamento interno com token de acesso exposto em histórico de repositório público | Média | Alto | Revogação do compartilhamento na origem; proibição de versionar URLs internas ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
-| R10 | Identificação nominal residual no modelo embutido dos `.pbix` e nos relatórios publicados | Alta | Médio | Regeneração dos painéis a partir das bases pseudonimizadas e republicação ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
+| R9 | Link de compartilhamento interno com token de acesso exposto em histórico de repositório público | Média | Alto | URLs removidas de todos os commits alcançáveis pela [reescrita do histórico](#reescrita-do-histórico); revogação do compartilhamento na origem pendente; proibição de versionar URLs internas ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
+| R10 | Identificação nominal residual nos `.pbix` e nos relatórios publicados — no dicionário de strings do modelo, como valor literal de filtro e como rótulo de campo | Alta | Médio | Regeneração dos painéis a partir das bases pseudonimizadas, com revisão dos filtros que hoje usam prenome como valor literal, e republicação ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
 | R11 | Reidentificação indireta por cruzamento das métricas individuais com bases públicas do Instituto | Média | Médio | Agregação das métricas ou substituição do código de projeto por código funcional institucional |
-| R12 | Dados pessoais de terceiros recuperáveis no histórico do repositório público, apesar da remoção da árvore atual | Alta | Alto | Reescrita do histórico com `git filter-repo`, ou recriação do repositório ([`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório)) |
+| R12 | Dados pessoais de terceiros recuperáveis no histórico do repositório público, apesar da remoção da árvore atual | Média | Alto | [Reescrita do histórico](#reescrita-do-histórico) executada em 16/09/2026 com `git filter-repo`; resíduo restrito aos objetos retidos pela plataforma e às referências de *pull request* ([`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push)) |
 
 ---
 
@@ -301,10 +302,11 @@ Registro das ocorrências de exposição de informação identificadas no reposi
 
 | Incidente | Natureza | Status |
 | --- | --- | --- |
-| [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso) | Link interno com token de acesso no histórico | 🔲 Aguardando revogação na origem |
-| [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados) | Identificação nominal de integrantes em artefatos versionados | ✅ Mitigado na árvore atual |
+| [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso) | Link interno com token de acesso no histórico | ⚠️ URLs eliminadas na reescrita — revogação na origem pendente |
+| [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados) | Identificação nominal de integrantes em artefatos versionados | ✅ Mitigado na árvore atual e no histórico alcançável |
 | [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) | Identificação nominal residual no modelo embutido dos `.pbix` | 🔲 Requer regeneração e republicação |
-| [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório) | Dados pessoais de terceiros em extrações versionadas e no histórico | ⚠️ Mitigado na árvore atual — histórico pendente |
+| [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório) | Dados pessoais de terceiros em extrações versionadas e no histórico | ✅ Mitigado na árvore atual e no histórico alcançável |
+| [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push) | Exposição residual não alcançada pelo `force push` | 🔲 Requer ação junto ao GitHub |
 
 ### INC-01 — Link de compartilhamento interno com token de acesso
 
@@ -314,24 +316,28 @@ Registro das ocorrências de exposição de informação identificadas no reposi
 | **Data de detecção** | 16/09/2026 |
 | **Detectado por** | Revisão de classificação e auditoria de conteúdo versionado |
 | **Natureza** | Link de compartilhamento interno com token de acesso (`?e=`) publicado em arquivo versionado |
-| **Artefato** | `dataset/.xls/readme.md` (removido da árvore atual na reestruturação; permanece no histórico) |
+| **Artefato** | `dataset/.xls/readme.md` (removido da árvore atual na reestruturação e do histórico na [reescrita](#reescrita-do-histórico)) |
 | **Origem do link** | `[link-interno-removido]` — arquivo `CONFREG.xlsx` |
 | **Classificação do conteúdo** | 🟠 Restrito — planilha de controle da conformidade com potencial dado pessoal |
 | **Amplitude** | Um único compartilhamento, referenciado em três formatos de URL |
 | **Exposição na árvore atual** | Não — verificada ausência de URLs internas em todos os `.md` |
-| **Exposição no histórico** | Sim — commits anteriores a `bcf3fb0` |
-| **Decisão** | Revogar o compartilhamento na origem; **não** reescrever o histórico |
-| **Status** | 🔲 Aguardando revogação na origem |
+| **Exposição no histórico** | **Remediada em 16/09/2026.** As URLs dos dois arquivos afetados foram substituídas por `[link-interno-removido]` em todas as versões dos commits alcançáveis, e `dataset/.xls/readme.md` foi removido de todo o histórico. Ver [Reescrita do histórico](#reescrita-do-histórico) |
+| **Decisão** | Reescrita do histórico com `git filter-repo` e `force push` sobre cópia integral do repositório, **e** revogação do compartilhamento na origem |
+| **Status** | ⚠️ URLs eliminadas — revogação na origem pendente |
 
-### Justificativa da decisão
+### Histórico da decisão
 
-A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** por três razões:
+A primeira avaliação, registrada em `a5c03d6`, foi **não** reescrever o histórico, por três razões:
 
 1. **O token já é público há mais de dois anos.** Qualquer agente pode já tê-lo capturado; apagar o histórico não desfaz a exposição passada.
 2. **A revogação na origem é a única mitigação efetiva.** Um link revogado deixa de conceder acesso independentemente de quem o possua.
-3. **Custo de coordenação.** A reescrita invalida todos os SHAs, quebrando clones, *forks* e referências existentes, sem ganho de segurança proporcional.
+3. **Custo de coordenação.** A reescrita invalida todos os SHAs, quebrando clones, *forks* e referências existentes.
+
+A avaliação foi **revista em 16/09/2026**, quando a auditoria descrita em [`INC-04`](#inc-04--dados-pessoais-de-terceiros-no-histórico-do-repositório) evidenciou dados pessoais de terceiros no mesmo histórico. As razões 1 e 3 continuam verdadeiras, mas deixaram de ser decisivas: o ganho de segurança a partir da razão 2 **não se aplica** a arquivos que são, eles próprios, o dado. Prevaleceu a diretriz de interromper o acesso continuado e de não manter em repositório público conteúdo classificado como 🔴 Restrito.
 
 ### Ação de remediação requerida
+
+A revogação na origem permanece necessária: a reescrita remove o link do repositório, mas não invalida o token já distribuído.
 
 1. Acessar o OneDrive institucional (conta `@ifs.edu.br`).
 2. Abrir **Compartilhados** → **Gerenciados por mim**.
@@ -355,8 +361,8 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 | **Amplitude** | Cinco integrantes; cerca de trinta mil registros na coluna `servidor` |
 | **Causa raiz** | Ausência de política de minimização de dados pessoais na concepção do projeto. O repositório nasceu como artefato técnico de uso interno e passou a ser público sem revisão de classificação |
 | **Decisão** | **Pseudonimizar** os integrantes por código `SRV-0N` em toda a documentação e nas bases redistribuídas, **preservando integralmente as métricas agregadas** para não comprometer a reprodutibilidade |
-| **Exposição residual** | Histórico do Git — os nomes originais permanecem nos commits anteriores a `bcf3fb0`, por decisão de não reescrever o histórico (mesma justificativa de [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso)) |
-| **Status** | ✅ Mitigado na árvore atual |
+| **Exposição residual** | Histórico do Git — **remediada em 16/09/2026**: os nomes foram substituídos por código `SRV-0N` em todas as versões dos commits alcançáveis. Resíduo em [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push) |
+| **Status** | ✅ Mitigado na árvore atual e no histórico alcançável |
 
 **Nota sobre o método.** A substituição foi feita por **casamento de valor integral**, nunca por busca textual. Em um primeiro ensaio, uma substituição por expressão regular alterou registros de **pessoas alheias à equipe**: o prenome de um dos integrantes ocorre como nome intermediário de terceiros e em descrições de contratação nas planilhas. O ensaio foi integralmente descartado e refeito com correspondência exata. A verificação comparou as versões original e pseudonimizada parte a parte, confirmando que a diferença ficou restrita às células de identificação e que as contagens de registros e de valores permaneceram idênticas.
 
@@ -371,10 +377,10 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 | **Detectado por** | Auditoria dos artefatos derivados após a pseudonimização das fontes |
 | **Natureza** | Os arquivos `.pbix` embutem uma cópia do modelo de dados. Como a pseudonimização foi aplicada às fontes e aos artefatos de texto, os arquivos gerados antes dela mantêm a identificação nominal no modelo |
 | **Artefatos** | Doze arquivos em [`dashboard/pbix/`](../dashboard/pbix/), incluindo as versões de legado |
-| **Evidência** | Varredura de texto sobre os arquivos: a relação nominal dos cinco integrantes foi localizada no modelo embutido de `cgconfreg_v6.pbix`, e a identificação de `cgconfreg_v8.4.pbix` referencia uma coluna cujo rótulo contém o prenome do autor. O conteúdo dos demais arquivos não é auditável por varredura de texto, pois o modelo é comprimido |
+| **Evidência** | Varredura parte a parte dos doze arquivos, nas codificações UTF-8 e UTF-16LE, independente de alinhamento de bytes e com cadeias de controle para estimar falso positivo. **Duas ocorrências reais:** `cgconfreg_v6.pbix` mantém, no dicionário de strings do modelo embutido — armazenado sem compressão —, os prenomes de quatro integrantes (`SRV-01`, `SRV-02`, `SRV-04` e `SRV-05`) e o do autor; `cgconfreg_v8.pbix` mantém, no layout do relatório, oito filtros cujo valor literal é o prenome de um integrante. Além disso, cinco arquivos nomeiam objetos do modelo com o prenome do autor (`Docs Victor`), o que é dado do próprio autor. As ocorrências em `impconfreg_csv_v4.pbix` e no modelo embutido de `cgconfreg_v8.4.pbix` são coincidências de sequência de bytes em conteúdo comprimido, não texto legível |
 | **Classificação do conteúdo** | 🔴 Pessoal |
-| **Amplitude** | Doze arquivos; os relatórios publicados no Power BI Service consomem o mesmo modelo |
-| **Causa raiz** | O modelo é interno ao formato `.pbix` e não é editável de forma segura sem reprocessamento do arquivo |
+| **Amplitude** | Doze arquivos; **dois** contêm identificação de terceiros. Os relatórios publicados no Power BI Service consomem o mesmo modelo |
+| **Causa raiz** | O modelo é interno ao formato `.pbix` e não é editável de forma segura sem reprocessamento do arquivo. A pseudonimização foi aplicada às fontes, que já não alimentam estes artefatos |
 | **Decisão** | **Regenerar** os painéis a partir das bases pseudonimizadas e republicar no workspace institucional, em substituição à edição direta do arquivo |
 | **Status** | 🔲 Pendente |
 
@@ -394,18 +400,50 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 | **Causa raiz** | A classificação inicial tratou como "dados operacionais" bases que contêm identificação de terceiros. A distinção entre identificação de integrantes e identificação de terceiros não havia sido feita, o que direcionou a primeira remediação apenas para os nomes da equipe |
 | **Decisão** | **Segregar**, não pseudonimizar — o dado de terceiro é o objeto da análise de conformidade e perderia a função probatória se descaracterizado. Os cinco arquivos foram retirados do versionamento e movidos para armazenamento controlado, com os caminhos bloqueados no `.gitignore` |
 | **Exposição na árvore atual** | Não — verificada a ausência de CPF e de e-mail nos quatro arquivos remanescentes |
-| **Exposição residual** | **Sim.** Os cinco arquivos continuam recuperáveis no histórico do Git em commits anteriores, acessíveis a quem conheça o SHA. A segregação protege o estado atual, não o passado |
-| **Status** | ⚠️ Mitigado na árvore atual — decisão sobre o histórico pendente |
+| **Exposição no histórico** | **Remediada em 16/09/2026.** Os cinco arquivos foram removidos de todos os commits alcançáveis das três ramificações publicadas, junto com os artefatos de `dataset/.xls/`. Ver [Reescrita do histórico](#reescrita-do-histórico) |
+| **Status** | ✅ Mitigado na árvore atual e no histórico alcançável — resíduo em [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push) |
 
-**Sobre a decisão de não reescrever o histórico.** A justificativa registrada em [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso) sustenta-se em um link revogável na origem. **Esse argumento não se aplica aqui:** não existe "origem" a revogar para um arquivo que é, ele próprio, o dado. As três razões originais precisam ser reavaliadas isoladamente para este incidente:
+### Reescrita do histórico
 
-| Razão original | Aplica-se ao `INC-04`? |
+Executada em **16/09/2026** como um único passe sobre as três ramificações publicadas — `main`, `79-impconfreg22nov23` e `CON-25-SIAFI-WEB` —, precedida de cópia integral do repositório (`git clone --mirror`), mantida até a conclusão da verificação.
+
+| Item | Conteúdo |
 | --- | --- |
-| O token já é público há mais de dois anos; apagar não desfaz a exposição | Parcialmente — a exposição passada não é revertida, mas a reescrita interrompe o acesso continuado |
-| A revogação na origem é a única mitigação efetiva | **Não** — não há origem revogável; a reescrita do histórico é a única mitigação disponível |
-| A reescrita invalida SHAs e quebra clones e *forks* | Sim — porém o custo recai sobre um repositório de um único mantenedor |
+| **Ferramenta** | `git filter-repo` 2.47.0, aplicado sobre a cópia espelhada |
+| **Remoção de caminhos** | Os cinco arquivos do `INC-04` e todos os artefatos de `dataset/.xls/` e de `.github/python/`, em qualquer commit |
+| **Substituição de identificadores** | Prenomes de integrantes e o nome do responsável, em toda versão de todo arquivo de texto, por código `SRV-0N`; URLs internas de compartilhamento por `[link-interno-removido]` |
+| **Arquivos binários** | Preservados sem alteração — a substituição incidiu apenas sobre conteúdo textual |
+| **Preservação de terceiros** | A substituição operou por correspondência de valor integral. Prenomes que ocorrem como nome intermediário de terceiros ou em descrições de contratação não foram tocados; a auditoria confrontou as contagens antes e depois no histórico |
+| **Autoria** | Preservada nas três ramificações (`main`: 104 commits; `79-impconfreg22nov23`: 48; `CON-25-SIAFI-WEB`: 90) |
+| **Efeito no conjunto de dados corrente** | Nenhum conteúdo. As 46 entradas de arquivo foram preservadas; 42 são idênticas ao estado anterior e 4 diferem apenas pela substituição do nome do responsável no caminho do arquivo de formatação |
+| **Efeito no histórico** | Os SHAs anteriores deixaram de ser alcançáveis; 8 commits que ficaram vazios com a remoção de caminhos foram descartados (`main`: 112 → 104 commits) |
+| **Verificação** | Varredura de todos os objetos alcançáveis das três ramificações: nenhum nome de terceiro, nenhum CPF, nenhum e-mail institucional, nenhum token de acesso e nenhuma URL interna |
 
-> **Recomendação.** Avaliar a reescrita do histórico (`git filter-repo` + *force push*) **especificamente para os cinco arquivos deste incidente**. Alternativa de menor custo: recriar o repositório público a partir do estado atual, preservando o histórico original em cópia privada ou em arquivamento fora do GitHub.
+**Limites da remediação.** O `force push` controla o que o repositório publica, não o que a plataforma retém:
+
+1. **Objetos retidos pela plataforma.** O GitHub mantém commits antigos acessíveis por SHA direto até executar a própria coleta de lixo. Enquanto isso não ocorrer, quem conhecer o SHA ainda alcança o conteúdo original.
+2. **Referências de *pull request*.** As referências `47` e `92` são mantidas pela plataforma e não são atualizadas por `force push` — ver [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push).
+
+A alternativa de recriar o repositório a partir do estado atual permanece disponível e é a única forma de certeza absoluta, ao custo de descartar o histórico de desenvolvimento.
+
+### INC-05 — Exposição residual não alcançada pelo `force push`
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Identificador** | `INC-05` |
+| **Data de detecção** | 16/09/2026 |
+| **Detectado por** | Auditoria dos objetos remanescentes no repositório remoto após a reescrita do histórico |
+| **Natureza** | Conteúdo pessoal ainda alcançável por canais que a reescrita e o `force push` não controlam |
+| **Canais** | **Objetos retidos pela plataforma:** commits antigos acessíveis por SHA direto até a coleta de lixo do GitHub. **Referências de *pull request*:** `refs/pull/47/head` e `refs/pull/92/head`, mantidas pela plataforma |
+| **Conteúdo alcançável** | Nos dois refs de *pull request*: identificação nominal de integrantes, o arquivo `.github/python/teams.md` e as cinco extrações com dados de terceiros. O ref `47` alcança 26 commits; o ref `92`, 84 |
+| **Classificação do conteúdo** | 🔴 Pessoal — dado de terceiros |
+| **Amplitude** | Dois refs de *pull request*, não alcançáveis a partir das ramificações publicadas. Os refs `2`, `3`, `5`, `6`, `45` e `46` foram auditados e não contêm ocorrências |
+| **Causa raiz** | O `force push` substitui o conteúdo das ramificações, não dos objetos que a plataforma mantém por conta própria |
+| **Mitigação pelo repositório** | Nenhuma |
+| **Ação requerida** | Solicitar ao suporte do GitHub a remoção dos objetos órfãos e a exclusão definitiva das referências de *pull request*; alternativa de certeza absoluta: recriar o repositório a partir do estado atual |
+| **Status** | 🔲 Requer ação junto ao GitHub |
+
+> **Nota.** A exclusão de *pull requests* não é uma operação disponível ao mantenedor do repositório. Encerrar ou excluir a ramificação de origem não remove a referência; a remoção depende do suporte da plataforma.
 
 > **Recomendação permanente.** Antes de versionar qualquer extração, aplicar a pergunta de triagem: *este arquivo contém identificação de alguém que não participou do projeto?* Se sim, a classificação é 🔴 Restrito e o arquivo não pertence ao versionamento.
 
@@ -422,11 +460,27 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 | Exposição de dados pessoais | Artefatos restritos publicados | 0 |
 | Cobertura de pseudonimização | Artefatos com identificação nominal tratada ÷ artefatos com identificação nominal | 100% |
 | Defasagem de pseudonimização | Bases com dado pessoal não tratado | 0 |
-| Identificação nominal em artefatos derivados | Arquivos `.pbix` com nomes próprios no modelo embutido | 0 |
+| Identificação nominal em artefatos derivados | Arquivos `.pbix` com prenome de terceiro no modelo embutido ou no layout do relatório | 0 |
 | Arquivos com dados de terceiros versionados | Extrações versionadas contendo CPF, nome de favorecido ou e-mail institucional | 0 |
-| Recuperabilidade histórica de dados pessoais | Incidentes de exposição cujo conteúdo permanece recuperável no histórico | 0 |
+| Recuperabilidade histórica de dados pessoais | Incidentes de exposição cujo conteúdo permanece recuperável nas ramificações publicadas | 0 |
+| Exposição residual por referências de *pull request* | Referências de *pull request* com conteúdo pessoal alcançável | 0 |
 | Links internos versionados | URLs com token de acesso presentes em artefatos versionados | 0 |
 | Incidentes de exposição abertos | Incidentes com status diferente de concluído | 0 |
+
+**Medição de 16/09/2026.** Valores apurados para os indicadores de exposição:
+
+| Indicador | Valor apurado | Situação |
+| --- | --- | --- |
+| Identificação nominal em artefatos derivados | **2** de 12 arquivos `.pbix` | 🔲 [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) |
+| Exposição residual por referências de *pull request* | **2** de 8 referências | 🔲 [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push) |
+| Recuperabilidade histórica de dados pessoais | 0 nas ramificações publicadas; resíduo em objetos retidos pela plataforma | 🔲 [`INC-05`](#inc-05--exposição-residual-não-alcançada-pelo-force-push) |
+| Links internos versionados | 0 — árvore atual e histórico alcançável | ✅ |
+| Arquivos com dados de terceiros versionados | 0 — quatro arquivos remanescentes auditados | ✅ |
+| Defasagem de pseudonimização | 0 nas bases redistribuídas | ✅ |
+| Exposição de dados pessoais | 12 artefatos 🟠 Restrito versionados, dos quais 2 com identificação de terceiros | 🔲 [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) |
+| Incidentes de exposição abertos | **3** (`INC-01`, `INC-03`, `INC-05`) | 🔲 |
+
+Os demais indicadores dependem de medição sobre a operação corrente e ainda não possuem série histórica.
 
 ---
 
@@ -444,9 +498,9 @@ Nível 5 — Otimizado      Validação automatizada; alertas proativos; melhori
 
 ### Ações prioritárias
 
-1. Revogar o compartilhamento do arquivo `CONFREG.xlsx` na origem (incidente `INC-01`).
-2. **Decidir sobre a reescrita do histórico do Git** para os cinco arquivos com dados de terceiros (`INC-04`) — é a única mitigação capaz de interromper a recuperabilidade dos dados pessoais.
-3. Regenerar os painéis a partir das bases pseudonimizadas e republicá-los (`INC-03`).
+1. Revogar o compartilhamento do arquivo `CONFREG.xlsx` na origem (`INC-01`).
+2. Solicitar ao suporte do GitHub a remoção dos objetos retidos e a exclusão definitiva das referências de *pull request* `47` e `92` (`INC-05`) — única ação capaz de eliminar o resíduo que o `force push` não alcança.
+3. Regenerar os painéis a partir das bases pseudonimizadas e republicá-los (`INC-03`), revisando os filtros do relatório que hoje usam prenome como valor literal.
 4. Revisar a classificação e a exposição dos artefatos restritos.
 5. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
 6. Formalizar o catálogo de dados com responsáveis nomeados.
