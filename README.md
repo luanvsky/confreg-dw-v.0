@@ -324,15 +324,17 @@ Mestrando em Ciência da Computação — linha de Engenharia de Software e Sist
 
 ### Equipe do projeto
 
-A operação de conformidade contou com a participação de cinco integrantes, identificados neste repositório por pseudônimos, conforme a política de minimização de dados pessoais:
+A operação de conformidade contou com a participação de cinco integrantes, identificados neste repositório apenas por **código pseudônimo**, conforme a política de minimização de dados pessoais:
 
-| Pseudônimo | Atribuição |
+| Código | Atribuição |
 | --- | --- |
-| Victor | Modelagem de dados, Power Query, medidas DAX e visualizações no Power BI |
-| SRV-01 | Extração de dados do SIAFI e registro na planilha de controle |
-| SRV-05 | Extração de dados do SIAFI e registro na planilha de controle |
-| Pavsjy | Extração de dados do SIAFI e registro na planilha de controle |
-| Tavky | Extração de dados do SIAFI e registro na planilha de controle |
+| `SRV-01` | Extração de dados do SIAFI e registro na planilha de controle |
+| `SRV-02` | Extração de dados do SIAFI e registro na planilha de controle |
+| `SRV-03` | Modelagem de dados, Power Query, medidas DAX e visualizações no Power BI |
+| `SRV-04` | Extração de dados do SIAFI e registro na planilha de controle |
+| `SRV-05` | Extração de dados do SIAFI e registro na planilha de controle |
+
+A tabela de correspondência entre código e pessoa **não é versionada** neste repositório. Detalhes da convenção em [docs/unidades-gestoras.md](./docs/unidades-gestoras.md#convenções-de-identificação).
 
 ---
 

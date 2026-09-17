@@ -83,16 +83,17 @@ Todo dado tratado no projeto deve ser classificado antes de ser armazenado ou pu
 
 | Artefato | Classificação | Observação |
 | --- | --- | --- |
-| `dashboard/pbix/*.pbix` | 🟢 Público | Não contêm dados embutidos com informação pessoal além do necessário à demonstração |
+| `dashboard/pbix/*.pbix` | 🟠 Restrito | O modelo de dados embutido mantém identificação nominal dos integrantes — ver [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) |
 | `dashboard/README.md`, `docs/arquitetura.md` | 🟢 Público | Documentação técnica |
-| `dataset/planilhas/impconfreg_2023_v2_*.csv/.tsv` | 🟠 Restrito | Contêm coluna `servidor` com identificação pessoal — **requer anonimização antes de qualquer redistribuição** |
-| `dataset/planilhas/*.xlsx` | 🟡 Interno | Bases de trabalho da equipe |
-| `docs/relatorios/analise-documental-2025.md` | 🟠 Restrito | Apresenta produtividade nominal por servidor |
-| `docs/unidades-gestoras.md` | 🟠 Restrito | Associa unidades gestoras a pessoas responsáveis |
+| `dataset/planilhas/impconfreg_2023_v2_*.csv/.tsv` | 🟠 Restrito | Coluna `servidor` **pseudonimizada** (`SRV-0N`); o restante do conteúdo é registro contábil |
+| `dataset/planilhas/*.xlsx` | 🟠 Restrito | Contêm identificação de terceiros (beneficiários e fornecedores) inerente ao registro contábil |
+| `dataset/planilhas/docs-*.xlsx` | 🟡 Interno | Listas de trabalho; nomes de arquivo referenciam integrantes |
+| `docs/relatorios/analise-documental-2025.md` | 🟠 Restrito | Produtividade individual associada a código pseudônimo |
+| `docs/unidades-gestoras.md` | 🟠 Restrito | Associa unidades gestoras a código pseudônimo |
 | `docs/termo-referencia-aquisicao-bi.md` | 🟡 Interno | Documento administrativo de contratação |
 | `apps/**` | 🟢 Público | Código-fonte de protótipos |
 
-> **Recomendação.** Os artefatos classificados como 🟠 Restrito devem ser movidos para armazenamento institucional controlado ou anonimizados. Enquanto permanecerem neste repositório público, o acesso deve ser tratado como já divulgado, com registro da decisão.
+> **Recomendação.** Os artefatos classificados como 🟠 Restrito devem ser movidos para armazenamento institucional controlado. Enquanto permanecerem neste repositório público, o acesso deve ser tratado como **já divulgado**, com registro expresso da decisão — é o caso das bases de conformidade, mantidas por exigência de reprodutibilidade da pesquisa.
 
 ---
 
@@ -182,7 +183,7 @@ O catálogo formaliza **quais dados existem, de onde vêm, quem responde por ele
 | --- | --- | --- | --- | --- |
 | `documento` | texto | Sim | Tipo do documento de gestão analisado | Deve pertencer à lista oficial de tipos documentais |
 | `numero` | texto | Sim | Identificador do documento no sistema de origem | Único por unidade gestora |
-| `servidor` | texto | Sim | Responsável pela análise de conformidade | **Dado pessoal — sujeito a anonimização** |
+| `servidor` | texto | Sim | Código pseudônimo do responsável pela análise de conformidade | Formato `SRV-0N`; a correspondência nome ↔ código é mantida fora do repositório |
 | `data` | data | Sim | Data da análise | Formato `dd/mm/aaaa`, não futura |
 | `unidade_gestora` | texto/código | Sim | Unidade responsável pelo registro | Deve constar na lista oficial de unidades |
 | `situacao` | texto | Sim | Resultado da análise | Domínio: `SEM RESTRIÇÃO` ou `COM RESTRIÇÃO` |
@@ -196,21 +197,37 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 
 ### Dados pessoais identificados
 
-| Dado | Finalidade | Necessário? | Tratamento recomendado |
+| Dado | Onde ocorre | Finalidade | Tratamento aplicado |
 | --- | --- | --- | --- |
-| Nome do servidor responsável pela análise | Distribuição de carga de trabalho e acompanhamento de produtividade | Sim, para fins de gestão | Substituir por código identificador (`SRV-001`) e manter o dicionário de correspondência fora do repositório |
-| E-mail institucional | Contato operacional | Não no repositório público | Remover de artefatos versionados |
-| Identificação de unidade gestora | Análise por unidade | Sim | Manter |
+| Nome do integrante responsável pela análise | Documentação, bases redistribuídas e arquivos `.xlsx` | Distribuição de carga de trabalho e acompanhamento de produtividade | ✅ **Pseudonimizado** para código `SRV-0N` |
+| Métricas individuais de produtividade | Relatório de análise documental | Gestão da força de trabalho | Mantidas, agora vinculadas apenas a código |
+| E-mail institucional | Colunas de controle das bases `.xlsx` | Contato operacional | ⚠️ Identificado, supressão pendente de decisão |
+| Nome de terceiros (beneficiários, fornecedores) | Conteúdo das bases `.xlsx` | Objeto próprio da análise de conformidade | ⚠️ Mantido — dado inerente ao registro contábil; exposição em revisão |
+| Identificação de unidade gestora | Todo o fluxo | Análise por unidade | Mantida — dado institucional, não pessoal |
+
+### Pseudonimização e minimização
+
+A identificação nominal dos integrantes foi substituída por **código pseudônimo** em toda a documentação e nas bases redistribuídas.
+
+| Item | Definição |
+| --- | --- |
+| **Esquema de código** | `SRV-01` a `SRV-05`, atribuídos por ordem alfabética do nome original |
+| **Escopo** | Nomes em documentos `.md`; coluna `servidor` das bases `.csv`/`.tsv`; células, listas de seleção e comentários dos arquivos `.xlsx` |
+| **Métricas agregadas** | Preservadas integralmente — a substituição alterou apenas a identificação, não os valores |
+| **Correspondência código ↔ pessoa** | **Não versionada.** Mantida pelo responsável pelo tratamento dos dados, fora do controle de versão |
+| **Natureza jurídica** | **Pseudonimização, não anonimização** — o código é reversível por quem detém a tabela de correspondência, e a combinação de unidade gestora, percentual de participação e período permite identificação indireta |
+
+A convenção aplicada está descrita em [unidades-gestoras.md](./unidades-gestoras.md#convenções-de-identificação).
 
 ### Medidas adotadas e recomendadas
 
 - **Minimização:** os painéis expõem indicadores agregados, não registros individuais.
-- **Anonimização na publicação:** o campo `servidor` deve ser substituído por código antes de qualquer redistribuição das bases.
+- **Pseudonimização na publicação:** o campo `servidor` foi substituído por código em todas as bases redistribuídas.
 - **Controle de finalidade:** o uso dos dados é restrito à análise de conformidade e à gestão da força de trabalho.
 - **Revisão de exposição:** artefatos classificados como 🟠 Restrito não deveriam ser mantidos em repositório público.
 - **Registro de decisão:** toda divulgação externa deve ser precedida de avaliação formal.
 
-> **Alerta de conformidade.** A presença de nomes de servidores e de métricas individuais de produtividade em repositório público caracteriza exposição de dados pessoais. Recomenda-se a anonimização imediata das bases redistribuídas e a revisão dos documentos [relatorios/analise-documental-2025.md](./relatorios/analise-documental-2025.md) e [unidades-gestoras.md](./unidades-gestoras.md).
+> **Alerta de conformidade.** A presença de nomes de servidores e de métricas individuais de produtividade em repositório público caracterizou exposição de dados pessoais (registrada em [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)). A mitigação na árvore atual está concluída; a exposição residual no histórico do Git e nos arquivos `.pbix` permanece e depende de decisão do responsável pelo tratamento dos dados.
 
 ---
 
@@ -223,6 +240,7 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 | **Perfis de acesso** | Diferenciação entre administrador, curador e consumidor | 🔲 Proposto |
 | **Atualização agendada monitorada** | Verificação diária da atualização do conjunto de dados | ✅ |
 | **Links públicos controlados** | Publicação apenas de conteúdos classificados como 🟢 Público | ⚠️ Requer revisão |
+| **Pseudonimização** | Identificação nominal dos integrantes substituída por código `SRV-0N` nos artefatos de texto e nas bases redistribuídas | ✅ Aplicada — pendente nos `.pbix` ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
 | **Gestão de credenciais e links compartilhados** | Nenhuma credencial, token ou link interno versionado | ⚠️ Incidente `INC-01` identificado no histórico — ver [Registro de incidentes](#registro-de-incidentes-de-exposição) |
 
 ---
@@ -232,7 +250,7 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 | # | Risco | Probabilidade | Impacto | Controle |
 | --- | --- | --- | --- | --- |
 | R1 | Indicador incorreto utilizado em decisão de gestão | Média | Alto | Conferência de totais contra a origem; versionamento dos `.pbix` |
-| R2 | Exposição de dados pessoais em repositório público | Alta | Alto | Anonimização e revisão de classificação |
+| R2 | Exposição de dados pessoais em repositório público | Média | Alto | Pseudonimização aplicada na documentação e nas bases redistribuídas ([`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados)); exposição residual no histórico e nos `.pbix` |
 | R3 | Quebra da consulta por alteração da estrutura da planilha | Média | Médio | Monitoramento diário; padronização de colunas |
 | R4 | Duplicidade de registros inflando indicadores | Média | Alto | Regra de unicidade `R02` |
 | R5 | Falha silenciosa na atualização agendada | Média | Alto | Verificação diária do status de atualização |
@@ -240,12 +258,22 @@ O projeto trata dados pessoais de servidores públicos envolvidos na análise de
 | R7 | Divergência entre painel publicado e versão do `.pbix` | Média | Médio | Correspondência de identificadores de versão ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
 | R8 | Dependência de pessoa única (*bus factor*) | Alta | Médio | Versionamento em Git e documentação do processo |
 | R9 | Link de compartilhamento interno com token de acesso exposto em histórico de repositório público | Média | Alto | Revogação do compartilhamento na origem; proibição de versionar URLs internas ([CONTRIBUTING.md](../CONTRIBUTING.md)) |
+| R10 | Identificação nominal residual no modelo embutido dos `.pbix` e nos relatórios publicados | Alta | Médio | Regeneração dos painéis a partir das bases pseudonimizadas e republicação ([`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix)) |
+| R11 | Reidentificação indireta por cruzamento das métricas individuais com bases públicas do Instituto | Média | Médio | Agregação das métricas ou substituição do código de projeto por código funcional institucional |
 
 ---
 
 ## Registro de incidentes de exposição
 
 Registro das ocorrências de exposição de informação identificadas no repositório, com a respectiva mitigação. O registro é mantido como evidência de diligência e como insumo para revisão das práticas de publicação.
+
+| Incidente | Natureza | Status |
+| --- | --- | --- |
+| [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso) | Link interno com token de acesso no histórico | 🔲 Aguardando revogação na origem |
+| [`INC-02`](#inc-02--identificação-nominal-de-integrantes-em-artefatos-versionados) | Identificação nominal de integrantes em artefatos versionados | ✅ Mitigado na árvore atual |
+| [`INC-03`](#inc-03--identificação-nominal-residual-no-modelo-embutido-dos-pbix) | Identificação nominal residual no modelo embutido dos `.pbix` | 🔲 Requer regeneração e republicação |
+
+### INC-01 — Link de compartilhamento interno com token de acesso
 
 | Campo | Conteúdo |
 | --- | --- |
@@ -281,6 +309,44 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 
 > **Recomendação permanente.** Links de compartilhamento institucional não devem ser versionados. Ao documentar uma fonte, registre o **sistema de origem** e a **forma de acesso institucional** — não a URL com token. Ver [fontes-de-dados.md](./fontes-de-dados.md).
 
+### INC-02 — Identificação nominal de integrantes em artefatos versionados
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Identificador** | `INC-02` |
+| **Data de detecção** | 16/09/2026 |
+| **Detectado por** | Revisão de classificação e auditoria de conteúdo versionado |
+| **Natureza** | Nome próprio de integrante associado a métricas individuais de produtividade e a unidades gestoras, em repositório público |
+| **Artefatos** | Documentação (`README.md`, `dashboard/README.md`, `docs/relatorios/analise-documental-2025.md`, `docs/unidades-gestoras.md`); coluna `servidor` das bases `.csv`/`.tsv`; células, listas de seleção e comentários dos arquivos `.xlsx` |
+| **Classificação do conteúdo** | 🔴 Pessoal |
+| **Amplitude** | Cinco integrantes; cerca de trinta mil registros na coluna `servidor` |
+| **Causa raiz** | Ausência de política de minimização de dados pessoais na concepção do projeto. O repositório nasceu como artefato técnico de uso interno e passou a ser público sem revisão de classificação |
+| **Decisão** | **Pseudonimizar** os integrantes por código `SRV-0N` em toda a documentação e nas bases redistribuídas, **preservando integralmente as métricas agregadas** para não comprometer a reprodutibilidade |
+| **Exposição residual** | Histórico do Git — os nomes originais permanecem nos commits anteriores a `bcf3fb0`, por decisão de não reescrever o histórico (mesma justificativa de [`INC-01`](#inc-01--link-de-compartilhamento-interno-com-token-de-acesso)) |
+| **Status** | ✅ Mitigado na árvore atual |
+
+**Nota sobre o método.** A substituição foi feita por **casamento de valor integral**, nunca por busca textual. Em um primeiro ensaio, uma substituição por expressão regular alterou registros de **pessoas alheias à equipe**: o prenome de um dos integrantes ocorre como nome intermediário de terceiros e em descrições de contratação nas planilhas. O ensaio foi integralmente descartado e refeito com correspondência exata. A verificação comparou as versões original e pseudonimizada parte a parte, confirmando que a diferença ficou restrita às células de identificação e que as contagens de registros e de valores permaneceram idênticas.
+
+> **Recomendação permanente.** A tabela de correspondência entre código e pessoa **não deve ser versionada**. Ela é mantida pelo responsável pelo tratamento dos dados, fora do controle de versão, e é o único artefato capaz de reverter a pseudonimização.
+
+### INC-03 — Identificação nominal residual no modelo embutido dos `.pbix`
+
+| Campo | Conteúdo |
+| --- | --- |
+| **Identificador** | `INC-03` |
+| **Data de detecção** | 16/09/2026 |
+| **Detectado por** | Auditoria dos artefatos derivados após a pseudonimização das fontes |
+| **Natureza** | Os arquivos `.pbix` embutem uma cópia do modelo de dados. Como a pseudonimização foi aplicada às fontes e aos artefatos de texto, os arquivos gerados antes dela mantêm a identificação nominal no modelo |
+| **Artefatos** | Doze arquivos em [`dashboard/pbix/`](../dashboard/pbix/), incluindo as versões de legado |
+| **Evidência** | Varredura de texto sobre os arquivos: a relação nominal dos cinco integrantes foi localizada no modelo embutido de `cgconfreg_v6.pbix`, e a identificação de `cgconfreg_v8.4.pbix` referencia uma coluna cujo rótulo contém o prenome do autor. O conteúdo dos demais arquivos não é auditável por varredura de texto, pois o modelo é comprimido |
+| **Classificação do conteúdo** | 🔴 Pessoal |
+| **Amplitude** | Doze arquivos; os relatórios publicados no Power BI Service consomem o mesmo modelo |
+| **Causa raiz** | O modelo é interno ao formato `.pbix` e não é editável de forma segura sem reprocessamento do arquivo |
+| **Decisão** | **Regenerar** os painéis a partir das bases pseudonimizadas e republicar no workspace institucional, em substituição à edição direta do arquivo |
+| **Status** | 🔲 Pendente |
+
+> **Recomendação.** Enquanto a regeneração não for concluída, os arquivos `.pbix` são classificados como 🟠 Restrito e os relatórios publicados não devem ser compartilhados com público externo. Regenerar é preferível a editar: além de eliminar a identificação, reconstrói o modelo a partir de uma fonte verificada.
+
 ---
 
 ## Indicadores de governança
@@ -292,7 +358,9 @@ A reescrita do histórico (`git filter-repo` + *force push*) foi **descartada** 
 | Aderência às regras de qualidade | Registros aprovados ÷ registros avaliados | ≥ 99% |
 | Tempestividade da atualização | Atualizações dentro do prazo ÷ total de ciclos | ≥ 98% |
 | Exposição de dados pessoais | Artefatos restritos publicados | 0 |
-| Defasagem de anonimização | Bases com dado pessoal não tratado | 0 |
+| Cobertura de pseudonimização | Artefatos com identificação nominal tratada ÷ artefatos com identificação nominal | 100% |
+| Defasagem de pseudonimização | Bases com dado pessoal não tratado | 0 |
+| Identificação nominal em artefatos derivados | Arquivos `.pbix` com nomes próprios no modelo embutido | 0 |
 | Links internos versionados | URLs com token de acesso presentes em artefatos versionados | 0 |
 | Incidentes de exposição abertos | Incidentes com status diferente de concluído | 0 |
 
@@ -313,11 +381,13 @@ Nível 5 — Otimizado      Validação automatizada; alertas proativos; melhori
 ### Ações prioritárias
 
 1. Revogar o compartilhamento do arquivo `CONFREG.xlsx` na origem (incidente `INC-01`).
-2. Anonimizar o campo `servidor` nas bases redistribuídas.
-3. Revisar a classificação e a exposição dos artefatos restritos.
-4. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
-5. Formalizar o catálogo de dados com responsáveis nomeados.
-6. Implantar segurança em nível de linha nos painéis publicados.
+2. Regenerar os painéis a partir das bases pseudonimizadas e republicá-los (`INC-03`).
+3. Decidir sobre a supressão dos e-mails institucionais das bases `.xlsx` (`INC-02`).
+4. Revisar a exposição de identificação de terceiros nas bases `.xlsx`.
+5. Revisar a classificação e a exposição dos artefatos restritos.
+6. Implantar as regras de validação `R01`–`R07` na camada de ingestão.
+7. Formalizar o catálogo de dados com responsáveis nomeados.
+8. Implantar segurança em nível de linha nos painéis publicados.
 
 ---
 

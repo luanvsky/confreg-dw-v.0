@@ -141,8 +141,8 @@ Abaixo estão alguns comandos INSERT para popular as tabelas com dados de exempl
 ```sql
 -- Inserindo servidores
 INSERT INTO Servidor (nome_servidor, cargo, setor, data_admissao, id_supervisor, nivel_acesso) VALUES
-('SRV-02 Silva', 'Analista', 'Financeiro', '2020-06-15', NULL, 'Aprovação'),
-('SRV-04 Souza', 'Gerente', 'Administrativo', '2018-10-22', NULL, 'Aprovação'),
+('Ana Ribeiro', 'Analista', 'Financeiro', '2020-06-15', NULL, 'Aprovação'),
+('Beatriz Costa', 'Gerente', 'Administrativo', '2018-10-22', NULL, 'Aprovação'),
 ('Carlos Oliveira', 'Assistente', 'Financeiro', '2023-02-10', 1, 'Edição');
 
 -- Inserindo unidades gestoras

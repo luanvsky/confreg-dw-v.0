@@ -135,17 +135,17 @@ O relato técnico detalhado da versão 8 — desafios de conexão, tratamento da
 
 ## Distribuição de tarefas
 
-A operação contou com cinco integrantes, identificados por pseudônimos conforme a política de minimização de dados pessoais.
+A operação contou com cinco integrantes, identificados apenas por **código pseudônimo** conforme a política de minimização de dados pessoais.
 
-| Integrante | Atribuição |
+| Código | Atribuição |
 | --- | --- |
-| **Victor** | Criação das visualizações no Power BI, limpeza e transformação dos dados, modelagem e medidas DAX |
-| **SRV-01** | Extração de dados do SIAFI e edição na planilha de controle |
-| **SRV-05** | Extração de dados do SIAFI e edição na planilha de controle |
-| **Pavsjy** | Extração de dados do SIAFI e edição na planilha de controle |
-| **Tavky** | Extração de dados do SIAFI e edição na planilha de controle |
+| **`SRV-01`** | Extração de dados do SIAFI e edição na planilha de controle |
+| **`SRV-02`** | Extração de dados do SIAFI e edição na planilha de controle |
+| **`SRV-03`** | Criação das visualizações no Power BI, limpeza e transformação dos dados, modelagem e medidas DAX |
+| **`SRV-04`** | Extração de dados do SIAFI e edição na planilha de controle |
+| **`SRV-05`** | Extração de dados do SIAFI e edição na planilha de controle |
 
-O mapeamento entre pseudônimos e unidades gestoras está em [../docs/unidades-gestoras.md](../docs/unidades-gestoras.md).
+O mapeamento entre código pseudônimo e unidade gestora está em [../docs/unidades-gestoras.md](../docs/unidades-gestoras.md).
 
 ---
 

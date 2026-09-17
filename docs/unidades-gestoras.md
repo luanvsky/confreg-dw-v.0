@@ -4,13 +4,16 @@ Mapeamento das unidades gestoras abrangidas pela rotina de conformidade de regis
 
 ---
 
-> ⚠️ **DOCUMENTO COM DADOS PESSOAIS**
+> ⚠️ **DOCUMENTO COM DADOS PESSOAIS PSEUDONIMIZADOS**
 >
-> Este documento associa **códigos de unidade gestora a servidores identificados nominalmente**,
-> o que configura tratamento de dado pessoal nos termos da Lei nº 13.709/2018 (LGPD).
+> Este documento associa **códigos de unidade gestora a integrantes identificados por código
+> pseudônimo** (`SRV-01` a `SRV-05`). A tabela de correspondência entre código e pessoa **não
+> é versionada neste repositório**.
 >
-> **Antes de reutilizar ou compartilhar:** substitua os nomes por pseudônimos ou códigos
-> funcionais e limite a circulação ao escopo das atividades de conformidade.
+> A associação remanescente configura dado pessoal na acepção da Lei nº 13.709/2018 (LGPD),
+> pois permite identificar indiretamente um indivíduo quando combinada com outras bases.
+> **Antes de reutilizar ou compartilhar:** limite a circulação ao escopo das atividades de
+> conformidade.
 >
 > Classificação: 🟠 **Restrito** — ver [governança de dados](./governanca-de-dados.md#privacidade-e-proteção-de-dados-pessoais).
 
@@ -38,17 +41,17 @@ O mapeamento abaixo é o insumo da dimensão `Unidade_Gestora` do modelo dimensi
 
 | Código | Unidade gestora | Responsável pela análise |
 | --- | --- | --- |
-| `23060` | Reitoria | Victor |
-| `23856` | Poço | Victor |
-| `23707` | Tobias Barreto | SRV-05 |
-| `23464` | Glória | SRV-04 |
-| `23463` | Estância | SRV-04 |
-| `23290` | Aracaju | SRV-05 |
-| `23462` | Itabaiana | SRV-04 |
-| `23289` | São Cristóvão | SRV-02 |
-| `23706` | Propriá | SRV-01 |
-| `23832` | Nossa Senhora do Socorro | SRV-01 |
-| `23288` | Lagarto | SRV-01 |
+| `23060` | Reitoria | `SRV-03` |
+| `23856` | Poço | `SRV-03` |
+| `23707` | Tobias Barreto | `SRV-05` |
+| `23464` | Glória | `SRV-04` |
+| `23463` | Estância | `SRV-04` |
+| `23290` | Aracaju | `SRV-05` |
+| `23462` | Itabaiana | `SRV-04` |
+| `23289` | São Cristóvão | `SRV-02` |
+| `23706` | Propriá | `SRV-01` |
+| `23832` | Nossa Senhora do Socorro | `SRV-01` |
+| `23288` | Lagarto | `SRV-01` |
 
 **Total: 11 unidades gestoras**, com distribuição entre 5 responsáveis.
 
@@ -60,13 +63,13 @@ O mapeamento abaixo é o insumo da dimensão `Unidade_Gestora` do modelo dimensi
 
 A distribuição efetiva do volume de documentos analisados por responsável, apurada no período de maio a agosto de 2025, está consolidada em [relatorios/analise-documental-2025.md](./relatorios/analise-documental-2025.md).
 
-| Responsável | Unidades atribuídas | Participação no total analisado |
+| Integrante | Unidades atribuídas | Participação no total analisado |
 | --- | --- | --- |
-| SRV-01 | 3 | 32,6% |
-| SRV-02 | 1 | 22,7% |
-| Victor | 2 | 18,0% |
-| SRV-04 | 3 | 16,5% |
-| SRV-05 | 2 | 10,3% |
+| `SRV-01` | 3 | 32,6% |
+| `SRV-02` | 1 | 22,7% |
+| `SRV-03` | 2 | 18,0% |
+| `SRV-04` | 3 | 16,5% |
+| `SRV-05` | 2 | 10,3% |
 
 A leitura conjunta das duas tabelas evidencia que **o volume analisado não é proporcional ao número de unidades atribuídas** — cada unidade gestora tem porte e complexidade distintos. Essa é uma das informações de gestão que o painel passou a tornar visível, apoiando a redistribuição de carga entre os responsáveis.
 
@@ -76,19 +79,21 @@ A leitura conjunta das duas tabelas evidencia que **o volume analisado não é p
 
 ## Convenções de identificação
 
-A operação de conformidade foi conduzida por cinco integrantes. Neste repositório, eles são identificados conforme a política de minimização de dados pessoais descrita em [governanca-de-dados.md](./governanca-de-dados.md):
+A operação de conformidade foi conduzida por cinco integrantes. Neste repositório, todos são identificados **exclusivamente por código pseudônimo**, conforme a política de minimização de dados pessoais descrita em [governanca-de-dados.md](./governanca-de-dados.md):
 
-| Integrante | Identificação neste repositório |
+| Código | Atribuição na operação |
 | --- | --- |
-| Victor | Nome próprio — autor do projeto técnico |
-| SRV-01 | `SRV-01` / pseudônimo `SRV-01` nos painéis |
-| SRV-05 | `SRV-05` / pseudônimo `SRV-05` nos painéis |
-| SRV-02 | `SRV-02` / pseudônimo `Pavsjy` nos painéis |
-| SRV-04 | `SRV-04` / pseudônimo `Tavky` nos painéis |
+| `SRV-01` | Extração de dados do SIAFI e registro na planilha de controle |
+| `SRV-02` | Extração de dados do SIAFI e registro na planilha de controle |
+| `SRV-03` | Modelagem de dados, Power Query, medidas DAX e visualizações no Power BI |
+| `SRV-04` | Extração de dados do SIAFI e registro na planilha de controle |
+| `SRV-05` | Extração de dados do SIAFI e registro na planilha de controle |
 
-Os pseudônimos são os mesmos utilizados na documentação dos painéis e na seção de distribuição de tarefas de [../dashboard/README.md](../dashboard/README.md).
+Os mesmos códigos são usados na coluna `servidor` de [`../dataset/planilhas/`](../dataset/planilhas/), no [relatório de análise documental](./relatorios/analise-documental-2025.md) e na seção de distribuição de tarefas de [../dashboard/README.md](../dashboard/README.md).
 
-> **Recomendação de governança.** Para elevar o projeto ao nível 2 de maturidade (ver [governanca-de-dados.md](./governanca-de-dados.md#roteiro-de-maturidade)), a identificação nominal deve ser substituída por **código funcional** em todo o repositório, inclusive nos painéis publicados. A decisão é do responsável pelo tratamento dos dados.
+> **Correspondência código ↔ pessoa.** A tabela que associa cada código ao integrante real **não é versionada neste repositório**. Ela é mantida pelo responsável pelo tratamento dos dados, fora do controle de versão, e é o único artefato capaz de reverter a pseudonimização.
+
+> **Risco residual.** A pseudonimização reduz, mas não elimina, a identificabilidade: os percentuais e a distribuição por unidade gestora permanecem estáveis no tempo e podem ser cruzados com outras bases públicas do Instituto. Para elevar o projeto ao nível 2 de maturidade (ver [governanca-de-dados.md](./governanca-de-dados.md#roteiro-de-maturidade)), a alternativa é substituir o código de projeto por **código funcional institucional** ou eliminar a granularidade individual, publicando apenas agregados. A decisão é do responsável pelo tratamento dos dados.
 
 ---
 
